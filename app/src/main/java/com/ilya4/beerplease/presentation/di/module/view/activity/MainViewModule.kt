@@ -1,6 +1,6 @@
 package com.ilya4.beerplease.presentation.di.module.view.activity
 
-import com.ilya4.beerplease.presentation.view.activity.base.MainActivity
+import com.ilya4.beerplease.presentation.view.activity.MainActivity
 import com.ilya4.beerplease.presentation.view.view.AMainMvpView
 import dagger.Binds
 import dagger.Module
