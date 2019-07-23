@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorAccent">#ffbf39</color>
+
+    <color name="shadow_camera">#4a3f3f3f</color>
+    <color name="gray_text_btn">#b7b7b7</color>
+    <color name="white_opacity_60">#99ffffff</color>
+    <color name="transparent">#00000000</color>
 </resources>

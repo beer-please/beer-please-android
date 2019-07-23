@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">beer-please-android</string>
+    <string name="app_name">Beer Please</string>
+
+    <string name="camera_compare_btn">Compare</string>
+
+    <string name="pd_camera_dialog_title">Доступ к камере запрещен</string>
+    <string name="pd_camera_dialog_description">Вы можете разрешить доступ в Настройках</string>
+    <string name="pd_camera_dialog_cancel">ОТМЕНА</string>
+    <string name="pd_camera_dialog_settings">В НАСТРОЙКИ</string>
+    
 </resources>

@@ -12,10 +12,13 @@ import org.reactivestreams.Publisher
 abstract class BasePresenter<V : MvpView> (val view : V, val behaviorProcessor: BehaviorProcessor<Boolean>) :
     IRxBusQueue {
     protected val activity : BaseActivity
+    protected lateinit var fragment : BaseFragment
     init {
 
-        if (view is BaseFragment)
+        if (view is BaseFragment) {
             activity = (view as BaseFragment).activity as BaseActivity
+            fragment = view
+        }
         else
             activity = view as BaseActivity
     }
