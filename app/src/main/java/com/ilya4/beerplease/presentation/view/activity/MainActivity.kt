@@ -21,7 +21,7 @@ class MainActivity: BaseActivity(), AMainMvpView, LifecycleOwner {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val fragment = ScanBarcodeFragment().newInstance(Bundle())
-        showFragment(ScanBarcodeFragment.TAG, fragment, false)
+//        val fragment = ScanBarcodeFragment().newInstance(Bundle())
+//        showFragment(ScanBarcodeFragment.TAG, fragment, false)
     }
 }
