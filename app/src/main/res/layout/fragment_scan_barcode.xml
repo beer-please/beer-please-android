@@ -37,47 +37,53 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     <CheckBox
+            android:id="@+id/torchCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_flash_selector"
+            android:button="@drawable/ic_flash_selector"
             android:layout_marginStart="@dimen/margin_50dp"
+            android:paddingTop="@dimen/margin_16dp"
+            android:enabled="false"
             app:layout_constraintTop_toTopOf="@id/bottomShadow"
             app:layout_constraintBottom_toBottomOf="@id/bottomShadow"
-            app:layout_constraintStart_toStartOf="@id/bottomShadow"/>
+            app:layout_constraintStart_toStartOf="@id/bottomShadow"
+            app:layout_constraintEnd_toStartOf="@id/bottlesRadioGroup"
+            app:layout_constraintHorizontal_bias="0"/>
 
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/AppTheme.Button.Transparent"
             android:text="@string/camera_compare_btn"
+            app:layout_constraintStart_toEndOf="@id/bottlesRadioGroup"
             app:layout_constraintTop_toTopOf="@id/bottomShadow"
             app:layout_constraintBottom_toBottomOf="@id/bottomShadow"
-            app:layout_constraintEnd_toEndOf="@id/bottomShadow"
-            android:layout_marginEnd="@dimen/margin_50dp"/>
+            app:layout_constraintEnd_toEndOf="@id/bottomShadow"/>
 
     <RadioGroup
+            android:id="@+id/bottlesRadioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:checkedButton="@id/oneBottleRadioBtn"
             app:layout_constraintTop_toTopOf="@id/bottomShadow"
             app:layout_constraintBottom_toBottomOf="@id/bottomShadow"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
         <RadioButton
+                android:id="@+id/oneBottleRadioBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_24dp"
-                android:background="@drawable/button_onebottle_selector"
-                android:checked="true"
-                android:button="@null"/>
+                android:button="@drawable/button_onebottle_selector"/>
 
         <RadioButton
+                android:id="@+id/compareBottleRadioBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:paddingBottom="2dp"
-                android:background="@drawable/button_comparebottle_selector"
-                android:button="@null"/>
+                android:button="@drawable/button_comparebottle_selector"/>
     </RadioGroup>
 
 

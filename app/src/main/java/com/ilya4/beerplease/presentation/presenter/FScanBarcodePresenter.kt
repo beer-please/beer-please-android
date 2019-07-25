@@ -22,6 +22,7 @@ class FScanBarcodePresenter(view: FScanBarcodeMvpView,
     BasePresenter<FScanBarcodeMvpView>(view, behaviorProcessor) {
 
     private val lastAnalyzedStamp = 0L
+    private lateinit var preview: Preview
 
     override fun init(): Boolean {
         requestCameraPermission()
@@ -62,9 +63,12 @@ class FScanBarcodePresenter(view: FScanBarcodeMvpView,
                 runBarcodeScanner(visionImage)
             }
         }
-        val preview = Preview(previewConfig)
-
+        preview = Preview(previewConfig)
         view.startCamera(preview, imageAnalysis)
+    }
+
+    fun torchOn(enableTorch: Boolean) {
+        preview.enableTorch(enableTorch)
     }
 
     private fun runBarcodeScanner(image: FirebaseVisionImage) {

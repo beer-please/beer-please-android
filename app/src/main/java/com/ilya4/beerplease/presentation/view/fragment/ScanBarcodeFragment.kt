@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.Surface
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.camera.core.CameraX
 import androidx.camera.core.ImageAnalysis
@@ -43,6 +44,7 @@ class ScanBarcodeFragment: BaseFragment(), FScanBarcodeMvpView, LifecycleOwner {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.init()
+        initButtonListeners()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -72,6 +74,7 @@ class ScanBarcodeFragment: BaseFragment(), FScanBarcodeMvpView, LifecycleOwner {
         }
 
         CameraX.bindToLifecycle(this, imageAnalysis, preview)
+        torchCheckBox.isEnabled = true
     }
 
     override fun showBarcodeToast(barcode: String) {
@@ -96,6 +99,12 @@ class ScanBarcodeFragment: BaseFragment(), FScanBarcodeMvpView, LifecycleOwner {
         matrix.postRotate(-rotationDegrees.toFloat(), centerX, centerY)
 
         cameraView.setTransform(matrix)
+    }
+
+    private fun initButtonListeners() {
+        torchCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            presenter.torchOn(isChecked)
+        }
     }
 
     private fun showPermissionDeniedDialog() {

@@ -2,5 +2,5 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_checked="false" android:drawable="@drawable/ic_flash_nonactive"/>
     <item android:state_checked="true" android:drawable="@drawable/ic_flash_active"/>
-
+    <item android:drawable="@drawable/ic_flash_nonactive"/>
 </selector>
