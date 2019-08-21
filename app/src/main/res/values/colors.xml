@@ -10,4 +10,5 @@
     <color name="transparent">#00000000</color>
 
     <color name="text_color">#3f3f3f</color>
+    <color name="checked_text_color">#19aa30</color>
 </resources>

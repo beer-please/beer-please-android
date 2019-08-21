@@ -9,5 +9,6 @@
     <string name="pd_camera_dialog_settings">В НАСТРОЙКИ</string>
 
     <string name="search_hint_et">Find your beer</string>
+    <string name="search_checked_text">checked</string>
     
 </resources>

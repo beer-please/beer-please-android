@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:background="@drawable/custom_background_search_item"
+        android:elevation="@dimen/elevation_20dp"
+        android:id="@+id/itemSearchLayout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginEnd="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:layout_marginBottom="@dimen/margin_8dp"
+>
+    
+    <ImageView
+            android:id="@+id/itemSearchImage"
+            android:layout_width="@dimen/width_64dp"
+            android:layout_height="@dimen/height_64dp"
+            android:layout_marginStart="@dimen/margin_16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:src="@drawable/pivo"/>
+
+    <TextView
+            android:id="@+id/itemBeerName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:layout_marginEnd="@dimen/margin_16dp"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_size_14sp"
+            android:lineSpacingExtra="@dimen/text_size_7sp"
+            app:layout_constraintTop_toTopOf="@id/itemSearchImage"
+            app:layout_constraintStart_toEndOf="@id/itemSearchImage"
+            app:layout_constraintEnd_toStartOf="@id/itemRatingIcon"
+            tools:text="Балтика 7 Экспортное"/>
+
+    <TextView
+            android:id="@+id/itemBeerGrade"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4dp"
+            android:fontFamily="sans-serif"
+            android:textSize="@dimen/text_size_14sp"
+            android:textColor="@color/text_color"
+            android:lineSpacingExtra="@dimen/text_size_7sp"
+            app:layout_constraintTop_toBottomOf="@id/itemBeerName"
+            app:layout_constraintStart_toStartOf="@id/itemBeerName"
+            app:layout_constraintEnd_toEndOf="@id/itemBeerName"
+            tools:text="Обычный лагер 5%"/>
+
+    <ImageView
+            android:id="@+id/itemBeerCountry"
+            android:layout_width="@dimen/margin_14dp"
+            android:layout_height="@dimen/margin_8dp"
+            android:layout_marginStart="@dimen/margin_16dp"
+            app:layout_constraintBottom_toBottomOf="@id/itemBeerCompany"
+            app:layout_constraintTop_toTopOf="@id/itemBeerCompany"
+            app:layout_constraintStart_toEndOf="@id/itemSearchImage"
+            tools:src="@drawable/flag_russia"/>
+
+    <TextView
+            android:id="@+id/itemBeerCompany"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8dp"
+            android:layout_marginEnd="@dimen/margin_16dp"
+            android:fontFamily="sans-serif"
+            android:lineSpacingExtra="9sp"
+            android:textColor="@color/gray_text_btn"
+            app:layout_constraintBottom_toBottomOf="@id/itemSearchImage"
+            app:layout_constraintStart_toEndOf="@id/itemBeerCountry"
+            app:layout_constraintEnd_toStartOf="@id/itemCheckedText"
+            tools:text="AF Brew"/>
+    
+    <ImageView
+            android:id="@+id/itemRatingIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_star_rating"
+            android:layout_marginEnd="@dimen/margin_4dp"
+            app:layout_constraintEnd_toStartOf="@id/itemRatingText"
+            app:layout_constraintTop_toTopOf="@id/itemRatingText"
+            app:layout_constraintBottom_toBottomOf="@id/itemRatingText"/>
+    
+    <TextView
+            android:id="@+id/itemRatingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_24dp"
+            android:fontFamily="sans-serif"
+            android:textSize="@dimen/text_size_12sp"
+            android:textColor="@color/text_color"
+            android:lineSpacingExtra="9sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/itemBeerName"
+            app:layout_constraintBottom_toBottomOf="@id/itemBeerName"
+            tools:text="4,8"/>
+
+    <TextView
+            android:id="@+id/itemCheckedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_12sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/checked_text_color"
+            android:text="@string/search_checked_text"
+            android:layout_marginEnd="@dimen/margin_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/itemBeerCompany"
+            app:layout_constraintBottom_toBottomOf="@id/itemBeerCompany"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
