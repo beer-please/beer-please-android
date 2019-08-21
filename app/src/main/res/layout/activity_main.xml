@@ -2,9 +2,10 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                                    android:orientation="vertical"
-                                                     android:background="@color/gray_text_btn"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent">
+
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
@@ -25,9 +26,12 @@
                 android:background="@color/colorPrimary"
                 app:menu="@menu/main_menu"
                 app:itemIconTint="@drawable/bottom_navigation_colors"
-                app:itemTextColor="@drawable/bottom_navigation_colors"
-        />
+                app:itemTextColor="@drawable/bottom_navigation_colors"/>
     </FrameLayout>
 
+    <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

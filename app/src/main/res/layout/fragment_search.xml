@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    
+    <EditText
+            android:id="@+id/search_et"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_8dp"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:layout_marginEnd="@dimen/margin_16dp"
+            android:paddingStart="@dimen/padding_24dp"
+            android:paddingEnd="@dimen/padding_24dp"
+            android:paddingTop="@dimen/margin_12dp"
+            android:paddingBottom="@dimen/padding_12dp"
+            android:elevation="@dimen/elevation_20dp"
+            android:background="@drawable/custom_search_background"
+            android:fontFamily="sans-serif"
+            android:textSize="@dimen/text_size_16sp"
+            android:textColor="@color/text_color"
+            android:lineSpacingExtra="@dimen/text_size_8sp"
+            android:hint="@string/search_hint_et"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Cherry"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

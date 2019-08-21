@@ -7,5 +7,7 @@
     <string name="pd_camera_dialog_description">Вы можете разрешить доступ в Настройках</string>
     <string name="pd_camera_dialog_cancel">ОТМЕНА</string>
     <string name="pd_camera_dialog_settings">В НАСТРОЙКИ</string>
+
+    <string name="search_hint_et">Find your beer</string>
     
 </resources>
