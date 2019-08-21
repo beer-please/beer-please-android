@@ -9,7 +9,6 @@ import dagger.android.AndroidInjection
 import javax.inject.Inject
 
 import androidx.lifecycle.LifecycleOwner
-import com.ilya4.beerplease.presentation.view.fragment.ScanBarcodeFragment
 
 
 class MainActivity: BaseActivity(), AMainMvpView, LifecycleOwner {
@@ -21,7 +20,5 @@ class MainActivity: BaseActivity(), AMainMvpView, LifecycleOwner {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        val fragment = ScanBarcodeFragment().newInstance(Bundle())
-//        showFragment(ScanBarcodeFragment.TAG, fragment, false)
     }
 }

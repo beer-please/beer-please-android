@@ -3,19 +3,18 @@ package com.ilya4.beerplease.presentation.view.custom
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.view.View
 
-class CustomBottomNavigationView @JvmOverloads constructor(context: Context,
+class CustomBottomBar @JvmOverloads constructor(context: Context,
                                                            attrs: AttributeSet? = null,
                                                            defStyleAttr: Int = 0):
-    BottomNavigationView(context, attrs, defStyleAttr) {
+    View(context, attrs, defStyleAttr) {
 
     private val path: Path = Path()
     private val paint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
     private var radius = 0
 
-    // Navigation bar bounds (width & height)
     private var navigationBarWidth: Int = 0
     private var navigationBarHeight: Int = 0
 
@@ -33,7 +32,6 @@ class CustomBottomNavigationView @JvmOverloads constructor(context: Context,
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-
         navigationBarWidth = width
         navigationBarHeight = height
 

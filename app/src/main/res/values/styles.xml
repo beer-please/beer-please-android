@@ -24,5 +24,4 @@
         <item name="android:textColor">@drawable/button_main_text_selector</item>
         <item name="android:padding">0dp</item>
     </style>
-
 </resources>

@@ -2,26 +2,32 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                                    android:orientation="vertical"
+                                                     android:background="@color/gray_text_btn"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent">
 
-    <FrameLayout
-            android:id="@+id/container"
-            android:background="@color/colorAccent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-
-    <com.ilya4.beerplease.presentation.view.custom.CustomBottomNavigationView
-            android:layout_width="match_parent"
-            android:layout_height="72dp"
-            android:layout_gravity="bottom"
-    />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabScan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimary"
+            android:layout_gravity="bottom|center"
             android:src="@drawable/ic_scan_barcode"
-            android:layout_gravity="center"/>
+            android:layout_marginBottom="@dimen/margin_24dp">
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigationView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                app:menu="@menu/main_menu"
+                app:itemIconTint="@drawable/bottom_navigation_colors"
+                app:itemTextColor="@drawable/bottom_navigation_colors"
+        />
+    </FrameLayout>
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
