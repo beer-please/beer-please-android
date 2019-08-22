@@ -5,17 +5,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ilya4.beerplease.R
+import com.ilya4.beerplease.domain.entity.search.SearchItem
 import com.ilya4.beerplease.presentation.presenter.FSearchPresenter
+import com.ilya4.beerplease.presentation.view.adapter.SearchAdapter
 import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
 import com.ilya4.beerplease.presentation.view.view.FSearchMvpView
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.fragment_search.*
 import javax.inject.Inject
 
 class SearchFragment: BaseFragment(), FSearchMvpView {
 
     @Inject
     lateinit var presenter: FSearchPresenter
+
+    val adapter = SearchAdapter()
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -29,6 +35,13 @@ class SearchFragment: BaseFragment(), FSearchMvpView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.init()
+        initRecyclerView()
+    }
+
+    private fun initRecyclerView() {
+        searchRv.adapter = adapter
+        searchRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        adapter.setSearchItems(SearchItem.getListSearchItems())
     }
 
     companion object{

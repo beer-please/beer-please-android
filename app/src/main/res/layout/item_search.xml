@@ -21,7 +21,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:src="@drawable/pivo"/>
+            android:src="@drawable/pivo"/>
 
     <TextView
             android:id="@+id/itemBeerName"
@@ -61,7 +61,7 @@
             app:layout_constraintBottom_toBottomOf="@id/itemBeerCompany"
             app:layout_constraintTop_toTopOf="@id/itemBeerCompany"
             app:layout_constraintStart_toEndOf="@id/itemSearchImage"
-            tools:src="@drawable/flag_russia"/>
+            android:src="@drawable/flag_russia"/>
 
     <TextView
             android:id="@+id/itemBeerCompany"
