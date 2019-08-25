@@ -26,8 +26,8 @@ class SearchAdapter: RecyclerView.Adapter<SearchViewHolder>() {
         holder.bind(searchItems[position])
     }
 
-    fun setSearchItems(searchItems: ArrayList<SearchItem>) {
-        this.searchItems = searchItems
+    fun setSearchItems(searchItems: List<SearchItem>) {
+        this.searchItems = searchItems as ArrayList<SearchItem>
         notifyDataSetChanged()
     }
 

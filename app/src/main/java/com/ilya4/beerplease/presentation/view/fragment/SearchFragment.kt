@@ -35,13 +35,26 @@ class SearchFragment: BaseFragment(), FSearchMvpView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.init()
+        initSearch()
         initRecyclerView()
+    }
+
+    override fun updateSearchResults(searchResults: List<SearchItem>) {
+        adapter.setSearchItems(searchResults)
+    }
+
+    override fun clearSearchResults() {
+        adapter.clearSearchItems()
+    }
+
+    private fun initSearch() {
+        presenter.setDebounce(searchEt)
+        searchEt.requestFocus()
     }
 
     private fun initRecyclerView() {
         searchRv.adapter = adapter
         searchRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        adapter.setSearchItems(SearchItem.getListSearchItems())
     }
 
     companion object{
