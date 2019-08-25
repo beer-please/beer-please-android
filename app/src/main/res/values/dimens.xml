@@ -89,6 +89,7 @@
     <dimen name="height_14dp">14dp</dimen>
     <dimen name="height_28dp">28dp</dimen>
     <dimen name="height_40dp">40dp</dimen>
+    <dimen name="height_48dp">48dp</dimen>
     <dimen name="height_60dp">60dp</dimen>
     <dimen name="height_64dp">64dp</dimen>
     <dimen name="height_80dp">80dp</dimen>
