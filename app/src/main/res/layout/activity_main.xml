@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   android:orientation="vertical"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="match_parent">
-
-
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/rootView"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/scanFab"
@@ -13,14 +12,23 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
             android:src="@drawable/ic_scan_barcode"
+            app:layout_behavior=".presentation.view.component.HideViewOnScrollWithMarginBottomBehavior"
             android:layout_marginBottom="@dimen/margin_24dp">
     </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
     <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+    <FrameLayout
+            android:id="@+id/bottomBarWrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:elevation="@dimen/elevation_5dp"
-            android:layout_gravity="bottom">
+            app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior">
         <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottomNavigationView"
                 android:layout_width="match_parent"
@@ -30,11 +38,5 @@
                 app:itemIconTint="@drawable/bottom_navigation_colors"
                 app:itemTextColor="@drawable/bottom_navigation_colors"/>
     </FrameLayout>
-
-    <FrameLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="?attr/actionBarSize"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

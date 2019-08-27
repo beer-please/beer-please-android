@@ -39,21 +39,21 @@ abstract class BasePresenter<V : MvpView> (val view : V, val behaviorProcessor: 
         bindEvents(activity)
     }
 
-    fun start() {
+    open fun start() {
         resume()
         rebindEvents()
     }
 
-    fun stop() {
+    open fun stop() {
         pause()
         unbindEvents()
     }
 
-    fun resume() {
+    open fun resume() {
         behaviorProcessor.onNext(true)
     }
 
-    fun pause() {
+    open fun pause() {
         behaviorProcessor.onNext(false)
         unbindEvents()
     }

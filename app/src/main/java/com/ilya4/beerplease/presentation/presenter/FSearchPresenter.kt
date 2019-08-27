@@ -14,6 +14,7 @@ class FSearchPresenter(view: FSearchMvpView,
     BasePresenter<FSearchMvpView>(view, behaviorProcessor) {
 
     private lateinit var searchDebounce: EditTextDebounce
+    private lateinit var query: String
 
     override fun init(): Boolean {
         return true
@@ -22,10 +23,21 @@ class FSearchPresenter(view: FSearchMvpView,
     override fun bindEvents(activity: BaseActivity) {
     }
 
+    override fun stop() {
+        super.stop()
+        searchUseCase.dispose()
+    }
+
     fun setDebounce(searchEt: EditText) {
         searchDebounce = EditTextDebounce.create(searchEt)
         searchDebounce.watch(
             {
+                if (it.trim().isNotEmpty())
+                    view.showSearchClearBtn(true)
+                else {
+                    view.showSearchClearBtn(false)
+                    view.showResultNotFound(false)
+                }
                 if (it.trim().length > 2) {
                 getSearchResults(it)
             } else {
@@ -35,16 +47,21 @@ class FSearchPresenter(view: FSearchMvpView,
     }
 
     private fun getSearchResults(query: String) {
+        this.query = query
         searchUseCase.execute(SearchObserver(), SearchUseCase.Params.forSearchBeers(query))
     }
 
 
     inner class SearchObserver: DefaultObserver<SearchUseCase.Result>() {
         override fun onNext(result: SearchUseCase.Result) {
-            if (result.searchResult != null && result.searchResult.isNotEmpty())
+            if (result.searchResult != null && result.searchResult.isNotEmpty()) {
                 view.updateSearchResults(result.searchResult)
-            else
+                view.showResultNotFound(false)
+            } else {
                 view.clearSearchResults()
+                view.showResultNotFound(true)
+                view.setBeerForResultNotFound(query)
+            }
         }
     }
 }

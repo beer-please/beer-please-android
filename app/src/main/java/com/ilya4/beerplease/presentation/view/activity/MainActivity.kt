@@ -1,6 +1,8 @@
 package com.ilya4.beerplease.presentation.view.activity
 
 import android.os.Bundle
+import android.view.View
+import android.view.ViewTreeObserver
 import com.ilya4.beerplease.R
 import com.ilya4.beerplease.presentation.presenter.AMainPresenter
 import com.ilya4.beerplease.presentation.view.activity.base.BaseActivity
@@ -20,6 +22,10 @@ class MainActivity: BaseActivity(), AMainMvpView  {
     @Inject
     lateinit var presenter: AMainPresenter
 
+    private lateinit var keyboardLayoutListener: ViewTreeObserver.OnGlobalLayoutListener
+    private var prevContentHeight = 0
+    private var isKeyboardShown = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
@@ -27,6 +33,13 @@ class MainActivity: BaseActivity(), AMainMvpView  {
         initButtonListeners()
 
         showSearchFragment()
+        initKeyboardLayoutListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        rootView.viewTreeObserver.addOnGlobalLayoutListener(keyboardLayoutListener)
+
     }
 
     private fun initButtonListeners() {
@@ -79,5 +92,31 @@ class MainActivity: BaseActivity(), AMainMvpView  {
             Objects.requireNonNull(fragmentCached.arguments)!!.putAll(bundle)
         }
         super.showFragment(key, fragmentCached, addToBackStack)
+    }
+
+    private fun initKeyboardLayoutListener() {
+        keyboardLayoutListener = ViewTreeObserver.OnGlobalLayoutListener{
+            if (rootView.height > 0) {
+                val contentHeight = rootView.getHeight()
+
+                if (!isKeyboardShown) {
+                    if (contentHeight < prevContentHeight) {
+                        isKeyboardShown = true
+                        bottomBarWrapper.visibility = View.GONE
+                        scanFab.visibility = View.GONE
+                    }
+                } else {
+                    if (contentHeight > prevContentHeight) {
+                        isKeyboardShown = false
+                        bottomBarWrapper.postDelayed({
+                            bottomBarWrapper.visibility = View.VISIBLE
+                            scanFab.visibility = View.VISIBLE
+                        }, 30)
+
+                    }
+                }
+                prevContentHeight = contentHeight
+            }
+        }
     }
 }

@@ -24,4 +24,15 @@
         <item name="android:textColor">@drawable/button_main_text_selector</item>
         <item name="android:padding">0dp</item>
     </style>
+
+    <style name="AddBeerButton">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:lines">1</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">@dimen/text_size_14sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:lineSpacingExtra">7sp</item>
+        <item name="android:padding">@dimen/padding_14dp</item>
+        <item name="android:background">@drawable/button_add_beer_background_selector</item>
+    </style>
 </resources>

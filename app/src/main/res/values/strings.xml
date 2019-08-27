@@ -10,5 +10,8 @@
 
     <string name="search_hint_et">Search for good beer…</string>
     <string name="search_checked_text">checked</string>
+    <string name="search_add_beer_text">Add beer</string>
+    <string name="search_title_not_found">Oops… \nNo results found for \n“%1$s”</string>
+    <string name="search_description_not_found">Can’t find the beer you’re looking for?\nTry to find it by scanner or…</string>
     
 </resources>
