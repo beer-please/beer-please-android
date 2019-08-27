@@ -1,6 +1,7 @@
 package com.ilya4.beerplease.presentation.presenter
 
 import android.widget.EditText
+import com.ilya4.beerplease.data.repository.SettingsDataSource
 import com.ilya4.beerplease.domain.usecase.DefaultObserver
 import com.ilya4.beerplease.domain.usecase.search.SearchUseCase
 import com.ilya4.beerplease.presentation.view.activity.base.BaseActivity
@@ -10,7 +11,8 @@ import io.reactivex.processors.BehaviorProcessor
 
 class FSearchPresenter(view: FSearchMvpView,
                        behaviorProcessor: BehaviorProcessor<Boolean>,
-                       private val searchUseCase: SearchUseCase):
+                       private val searchUseCase: SearchUseCase,
+                       private val settingsDataSource: SettingsDataSource):
     BasePresenter<FSearchMvpView>(view, behaviorProcessor) {
 
     private lateinit var searchDebounce: EditTextDebounce
@@ -32,9 +34,10 @@ class FSearchPresenter(view: FSearchMvpView,
         searchDebounce = EditTextDebounce.create(searchEt)
         searchDebounce.watch(
             {
-                if (it.trim().isNotEmpty())
+                if (it.trim().isNotEmpty()) {
                     view.showSearchClearBtn(true)
-                else {
+                    view.clearSearchHistory()
+                } else {
                     view.showSearchClearBtn(false)
                     view.showResultNotFound(false)
                 }
@@ -46,11 +49,25 @@ class FSearchPresenter(view: FSearchMvpView,
         }, 400)
     }
 
-    private fun getSearchResults(query: String) {
+    fun getSearchResults(query: String) {
         this.query = query
         searchUseCase.execute(SearchObserver(), SearchUseCase.Params.forSearchBeers(query))
     }
 
+    fun saveQueryToSearchHistory() {
+        var searchHistoryList = settingsDataSource.getSearchHistory()?.toMutableList()
+        if (searchHistoryList == null)
+            searchHistoryList = ArrayList()
+
+        searchHistoryList.add(query)
+        settingsDataSource.setSearchHistory(searchHistoryList)
+    }
+
+    fun requestShowSearchHistory() {
+        val searchHistorySet = settingsDataSource.getSearchHistory()?.toMutableList()
+        if (searchHistorySet != null)
+            view.setSearchHistory(searchHistorySet as ArrayList<String>)
+    }
 
     inner class SearchObserver: DefaultObserver<SearchUseCase.Result>() {
         override fun onNext(result: SearchUseCase.Result) {

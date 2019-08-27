@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ilya4.beerplease.R
 import com.ilya4.beerplease.domain.entity.search.SearchItem
 import com.ilya4.beerplease.presentation.presenter.FSearchPresenter
 import com.ilya4.beerplease.presentation.view.activity.MainActivity
 import com.ilya4.beerplease.presentation.view.adapter.SearchAdapter
+import com.ilya4.beerplease.presentation.view.adapter.SearchHistoryAdapter
 import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
 import com.ilya4.beerplease.presentation.view.view.FSearchMvpView
 import com.ilya4.beerplease.utils.Utils
@@ -23,7 +25,8 @@ class SearchFragment: BaseFragment(), FSearchMvpView {
     @Inject
     lateinit var presenter: FSearchPresenter
 
-    private val adapter = SearchAdapter()
+    private val searchAdapter = SearchAdapter()
+    private val searchHistoryAdapter = SearchHistoryAdapter()
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -43,11 +46,11 @@ class SearchFragment: BaseFragment(), FSearchMvpView {
     }
 
     override fun updateSearchResults(searchResults: List<SearchItem>) {
-        adapter.setSearchItems(searchResults)
+        searchAdapter.setSearchItems(searchResults)
     }
 
     override fun clearSearchResults() {
-        adapter.clearSearchItems()
+        searchAdapter.clearSearchItems()
     }
 
     override fun showResultNotFound(show: Boolean) {
@@ -66,14 +69,33 @@ class SearchFragment: BaseFragment(), FSearchMvpView {
         Utils.hideKeyboard(activity as MainActivity, searchEt)
     }
 
+    override fun setSearchHistory(searchHistory: ArrayList<String>) {
+        searchHistoryAdapter.setSearchHistoryItems(searchHistory)
+    }
+
+    override fun clearSearchHistory() {
+        searchHistoryAdapter.clearSearchHistoryItems()
+    }
+
     private fun initSearch() {
         presenter.setDebounce(searchEt)
         searchEt.requestFocus()
+        searchEt.setOnEditorActionListener { tv, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                presenter.getSearchResults(tv.text.toString())
+                presenter.saveQueryToSearchHistory()
+                hideKeyboard()
+                return@setOnEditorActionListener true
+            }
+            return@setOnEditorActionListener false
+        }
     }
 
     private fun initRecyclerView() {
-        searchRv.adapter = adapter
+        searchRv.adapter = searchAdapter
         searchRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        searchHistoryRv.adapter = searchHistoryAdapter
+        searchHistoryRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     }
 
     private fun initButtonListeners() {
@@ -82,6 +104,10 @@ class SearchFragment: BaseFragment(), FSearchMvpView {
             clearSearchResults()
             showResultNotFound(false)
             showSearchClearBtn(false)
+        }
+        searchEt.setOnClickListener {
+            if (searchEt.text.toString() == "")
+                presenter.requestShowSearchHistory()
         }
     }
 

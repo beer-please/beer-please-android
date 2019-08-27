@@ -9,4 +9,6 @@ interface FSearchMvpView: MvpView {
     fun setBeerForResultNotFound(nameBeer: String)
     fun showSearchClearBtn(show: Boolean)
     fun hideKeyboard()
+    fun setSearchHistory(searchHistory: ArrayList<String>)
+    fun clearSearchHistory()
 }
