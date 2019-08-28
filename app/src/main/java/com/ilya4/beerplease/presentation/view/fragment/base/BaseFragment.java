@@ -31,11 +31,11 @@ public class BaseFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        try {
-            fragmentInteractionCallback = (FragmentInteractionCallback) context;
-        }catch (ClassCastException e) {
-            throw new RuntimeException(context.toString() + " must implement " + FragmentInteractionCallback.class.getName());
-        }
+//        try {
+//            fragmentInteractionCallback = (FragmentInteractionCallback) context;
+//        }catch (ClassCastException e) {
+//            throw new RuntimeException(context.toString() + " must implement " + FragmentInteractionCallback.class.getName());
+//        }
     }
 
     @Override

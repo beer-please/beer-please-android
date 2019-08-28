@@ -29,7 +29,12 @@ class ManagersModule {
         val options = FirebaseVisionBarcodeDetectorOptions.Builder()
             .setBarcodeFormats(
                 FirebaseVisionBarcode.FORMAT_EAN_8,
-                FirebaseVisionBarcode.FORMAT_EAN_13)
+                FirebaseVisionBarcode.FORMAT_EAN_13,
+                FirebaseVisionBarcode.FORMAT_CODE_128,
+                FirebaseVisionBarcode.FORMAT_CODE_39,
+                FirebaseVisionBarcode.FORMAT_CODE_93,
+                FirebaseVisionBarcode.FORMAT_UPC_A,
+                FirebaseVisionBarcode.FORMAT_UPC_E)
             .build()
 
         return FirebaseVision.getInstance().getVisionBarcodeDetector(options)
