@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ilya4.beerplease.R
 import com.ilya4.beerplease.presentation.view.adapter.holder.SearchHistoryViewHolder
+import com.ilya4.beerplease.presentation.view.listener.OnSearchHistoryItemClickListener
 
-class SearchHistoryAdapter: RecyclerView.Adapter<SearchHistoryViewHolder>() {
+class SearchHistoryAdapter(private val listener: OnSearchHistoryItemClickListener): RecyclerView.Adapter<SearchHistoryViewHolder>() {
 
     private var searchHistorySet: ArrayList<String> = ArrayList()
 
@@ -14,7 +15,7 @@ class SearchHistoryAdapter: RecyclerView.Adapter<SearchHistoryViewHolder>() {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.item_search_history, parent, false)
 
-        return  SearchHistoryViewHolder(view)
+        return  SearchHistoryViewHolder(view, listener)
     }
 
     override fun getItemCount(): Int {

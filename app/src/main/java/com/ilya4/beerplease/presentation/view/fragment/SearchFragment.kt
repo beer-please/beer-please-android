@@ -14,19 +14,20 @@ import com.ilya4.beerplease.presentation.view.activity.MainActivity
 import com.ilya4.beerplease.presentation.view.adapter.SearchAdapter
 import com.ilya4.beerplease.presentation.view.adapter.SearchHistoryAdapter
 import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
+import com.ilya4.beerplease.presentation.view.listener.OnSearchHistoryItemClickListener
 import com.ilya4.beerplease.presentation.view.view.FSearchMvpView
 import com.ilya4.beerplease.utils.Utils
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_search.*
 import javax.inject.Inject
 
-class SearchFragment: BaseFragment(), FSearchMvpView {
+class SearchFragment: BaseFragment(), FSearchMvpView, OnSearchHistoryItemClickListener {
 
     @Inject
     lateinit var presenter: FSearchPresenter
 
     private val searchAdapter = SearchAdapter()
-    private val searchHistoryAdapter = SearchHistoryAdapter()
+    private val searchHistoryAdapter = SearchHistoryAdapter(this)
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -77,16 +78,22 @@ class SearchFragment: BaseFragment(), FSearchMvpView {
         searchHistoryAdapter.clearSearchHistoryItems()
     }
 
+    override fun onSearchHistoryItemClick(query: String) {
+        searchHistoryAdapter.clearSearchHistoryItems()
+        searchEt.setText(query)
+        searchEt.setSelection(query.length)
+    }
+
     private fun initSearch() {
         presenter.setDebounce(searchEt)
         searchEt.requestFocus()
         searchEt.setOnEditorActionListener { tv, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH && tv.text.toString().trim().length > 1) {
                 presenter.getSearchResults(tv.text.toString())
                 presenter.saveQueryToSearchHistory()
-                hideKeyboard()
                 return@setOnEditorActionListener true
             }
+            hideKeyboard()
             return@setOnEditorActionListener false
         }
     }

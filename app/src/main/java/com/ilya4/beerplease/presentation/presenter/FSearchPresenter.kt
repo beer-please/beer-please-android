@@ -58,7 +58,9 @@ class FSearchPresenter(view: FSearchMvpView,
         var searchHistoryList = settingsDataSource.getSearchHistory()?.toMutableList()
         if (searchHistoryList == null)
             searchHistoryList = ArrayList()
-
+        if (searchHistoryList.contains(query)) {
+            searchHistoryList.remove(query)
+        }
         searchHistoryList.add(query)
         settingsDataSource.setSearchHistory(searchHistoryList)
     }
