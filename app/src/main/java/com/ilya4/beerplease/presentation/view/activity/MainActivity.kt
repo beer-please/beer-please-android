@@ -6,6 +6,7 @@ import android.view.ViewTreeObserver
 import com.ilya4.beerplease.R
 import com.ilya4.beerplease.presentation.presenter.AMainPresenter
 import com.ilya4.beerplease.presentation.view.activity.base.BaseActivity
+import com.ilya4.beerplease.presentation.view.fragment.BeerCardFragment
 import com.ilya4.beerplease.presentation.view.view.AMainMvpView
 import dagger.android.AndroidInjection
 import javax.inject.Inject
@@ -64,6 +65,11 @@ class MainActivity: BaseActivity(), AMainMvpView  {
         startActivity(FindProfileBeerByBarcodeActivity::class.java, false)
     }
 
+    fun showBeerCardFragment() {
+        val bundle = Bundle()
+        showFragment(BeerCardFragment.TAG, bundle)
+    }
+
     private fun showSearchFragment() {
         val bundle = Bundle()
         showFragment(SearchFragment.TAG, bundle)
@@ -86,6 +92,10 @@ class MainActivity: BaseActivity(), AMainMvpView  {
                 UserProfileFragment.TAG -> {
                     fragmentCached = UserProfileFragment().newInstance(bundle)
                     addToBackStack = false
+                }
+                BeerCardFragment.TAG -> {
+                    fragmentCached = BeerCardFragment().newInstance(bundle)
+                    addToBackStack = true
                 }
             }
         } else {

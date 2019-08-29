@@ -30,4 +30,8 @@ class BeerCardFragment: BaseFragment(), FBeerCardMvpView {
         super.onViewCreated(view, savedInstanceState)
         presenter.init()
     }
+
+    companion object {
+        const val TAG = "BeerCardFragment"
+    }
 }

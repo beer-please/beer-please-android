@@ -6,8 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ilya4.beerplease.R
 import com.ilya4.beerplease.domain.entity.search.SearchItem
 import com.ilya4.beerplease.presentation.view.adapter.holder.SearchViewHolder
+import com.ilya4.beerplease.presentation.view.listener.OnSearchItemClickListener
 
-class SearchAdapter: RecyclerView.Adapter<SearchViewHolder>() {
+class SearchAdapter(private val listener: OnSearchItemClickListener): RecyclerView.Adapter<SearchViewHolder>() {
 
     private var searchItems = ArrayList<SearchItem>()
 
@@ -15,7 +16,7 @@ class SearchAdapter: RecyclerView.Adapter<SearchViewHolder>() {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.item_search, parent, false)
 
-        return SearchViewHolder(view)
+        return SearchViewHolder(view, listener)
     }
 
     override fun getItemCount(): Int {

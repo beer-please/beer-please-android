@@ -15,18 +15,19 @@ import com.ilya4.beerplease.presentation.view.adapter.SearchAdapter
 import com.ilya4.beerplease.presentation.view.adapter.SearchHistoryAdapter
 import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
 import com.ilya4.beerplease.presentation.view.listener.OnSearchHistoryItemClickListener
+import com.ilya4.beerplease.presentation.view.listener.OnSearchItemClickListener
 import com.ilya4.beerplease.presentation.view.view.FSearchMvpView
 import com.ilya4.beerplease.utils.Utils
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_search.*
 import javax.inject.Inject
 
-class SearchFragment: BaseFragment(), FSearchMvpView, OnSearchHistoryItemClickListener {
+class SearchFragment: BaseFragment(), FSearchMvpView, OnSearchHistoryItemClickListener, OnSearchItemClickListener {
 
     @Inject
     lateinit var presenter: FSearchPresenter
 
-    private val searchAdapter = SearchAdapter()
+    private val searchAdapter = SearchAdapter(this)
     private val searchHistoryAdapter = SearchHistoryAdapter(this)
 
     override fun onAttach(context: Context) {
@@ -76,6 +77,10 @@ class SearchFragment: BaseFragment(), FSearchMvpView, OnSearchHistoryItemClickLi
 
     override fun clearSearchHistory() {
         searchHistoryAdapter.clearSearchHistoryItems()
+    }
+
+    override fun onSearchItemClick(searchItem: SearchItem) {
+        (activity as MainActivity).showBeerCardFragment()
     }
 
     override fun onSearchHistoryItemClick(query: String) {
