@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import static com.ilya4.beerplease.presentation.app.Constants.EXTRA_IS_ROOT_FRAGMENT;
+
 
 public class BaseFragment extends Fragment {
 
@@ -19,11 +21,16 @@ public class BaseFragment extends Fragment {
 
     private int fragmentId = -1;
 
-    public BaseFragment newInstance(Bundle args) {
+    public BaseFragment newInstance(Bundle args, boolean isRoot) {
         BaseFragment fragment = this;
         if (args != null) {
             fragmentId = args.getInt(FRAGMENT_ID);
+            args.putBoolean(EXTRA_IS_ROOT_FRAGMENT, isRoot);
             fragment.setArguments(args);
+        } else {
+            Bundle bundle = new Bundle();
+            bundle.putBoolean(EXTRA_IS_ROOT_FRAGMENT, isRoot);
+            fragment.setArguments(bundle);
         }
         return fragment;
     }
@@ -55,5 +62,9 @@ public class BaseFragment extends Fragment {
 
     public static void setCurrentTab(String currentTab) {
         BaseFragment.currentTab = currentTab;
+    }
+
+    public static String getCurrentTab() {
+        return currentTab;
     }
 }

@@ -80,7 +80,8 @@ class SearchFragment: BaseFragment(), FSearchMvpView, OnSearchHistoryItemClickLi
     }
 
     override fun onSearchItemClick(searchItem: SearchItem) {
-        (activity as MainActivity).showBeerCardFragment()
+        val bundle = Bundle()
+        (activity as MainActivity).showBeerCardFragment(getCurrentTab(), true, bundle)
     }
 
     override fun onSearchHistoryItemClick(query: String) {

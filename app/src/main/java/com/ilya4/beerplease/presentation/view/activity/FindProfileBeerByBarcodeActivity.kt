@@ -19,7 +19,7 @@ class FindProfileBeerByBarcodeActivity: BaseActivity(),AFindProfileBeerByBarcode
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_find_profile_beer_by_barcode)
         presenter.init()
-        val fragment = ScanBarcodeFragment().newInstance(Bundle())
+        val fragment = ScanBarcodeFragment().newInstance(Bundle(), true)
         showFragment(ScanBarcodeFragment.TAG, fragment, false)
     }
 }

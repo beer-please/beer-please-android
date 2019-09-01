@@ -14,4 +14,9 @@ object Constants {
     const val ACTION = ".action"
     const val DATA_KEY_1 = ".data_key_1"
     const val DATA_KEY_2 = ".data_key_2"
+
+    const val TAB_SEARCH = "tab_search"
+    const val TAB_PROFILE = "tab_profile"
+
+    const val EXTRA_IS_ROOT_FRAGMENT = ".extra_is_root_fragment"
 }
