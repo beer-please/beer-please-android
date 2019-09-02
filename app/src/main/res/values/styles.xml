@@ -25,7 +25,7 @@
         <item name="android:padding">0dp</item>
     </style>
 
-    <style name="AddBeerButton">
+    <style name="AppButton">
         <item name="android:textAllCaps">false</item>
         <item name="android:lines">1</item>
         <item name="android:fontFamily">sans-serif-medium</item>
@@ -33,6 +33,29 @@
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:lineSpacingExtra">7sp</item>
         <item name="android:padding">@dimen/padding_14dp</item>
+    </style>
+
+    <style name="AppButton.WhiteOnYellow">
         <item name="android:background">@drawable/button_add_beer_background_selector</item>
+    </style>
+
+    <style name="AppButton.WhiteOnBlack">
+        <item name="android:background">@drawable/button_checkin_background_selector</item>
+    </style>
+
+    <style name="BeerSpecificationStyle">
+        <item name="android:textSize">@dimen/text_size_16sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:lineSpacingExtra">12sp</item>
+    </style>
+
+    <style name="BeerSpecificationStyle.Title">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+    
+    <style name="BeerSpecificationStyle.Description">
+        <item name="android:textColor">@color/gray_text_btn</item>
+        <item name="android:layout_marginStart">@dimen/margin_16dp</item>
     </style>
 </resources>

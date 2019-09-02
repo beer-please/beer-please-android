@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+            android:id="@+id/beerStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/BeerSpecificationStyle.Title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="DIPA" />
+
+    <TextView
+            android:id="@+id/beerStyleInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/BeerSpecificationStyle.Description"
+            app:layout_constraintTop_toTopOf="@id/beerStyle"
+            app:layout_constraintBottom_toBottomOf="@id/beerStyle"
+            app:layout_constraintStart_toEndOf="@id/beerStyle"
+            android:text="Double India Pale Ale" />
+
+    <TextView
+            android:id="@+id/abvValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/BeerSpecificationStyle.Title"
+            android:layout_marginTop="@dimen/margin_16dp"
+            app:layout_constraintTop_toBottomOf="@id/beerStyle"
+            app:layout_constraintStart_toStartOf="@id/beerStyle"
+            android:text="7% ABV" />
+
+    <TextView
+            android:id="@+id/abvInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/BeerSpecificationStyle.Description"
+            app:layout_constraintTop_toTopOf="@id/abvValue"
+            app:layout_constraintBottom_toBottomOf="@id/abvValue"
+            app:layout_constraintStart_toEndOf="@id/abvValue"
+            android:text="@string/beer_card_abv_description"/>
+
+    <TextView
+            android:id="@+id/ibuValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16dp"
+            style="@style/BeerSpecificationStyle.Title"
+            app:layout_constraintTop_toBottomOf="@id/abvValue"
+            app:layout_constraintStart_toStartOf="@id/beerStyle"
+            android:text="70 IBU" />
+
+    <TextView
+            android:id="@+id/ibuInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/BeerSpecificationStyle.Description"
+            app:layout_constraintTop_toTopOf="@id/ibuValue"
+            app:layout_constraintBottom_toBottomOf="@id/ibuValue"
+            app:layout_constraintStart_toEndOf="@id/ibuValue"
+            android:text="@string/beer_card_ibu_description" />
+
+    <ImageView
+            android:id="@+id/beerSpecInfoBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_beer_specification_info"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

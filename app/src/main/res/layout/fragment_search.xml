@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_24dp"
                 android:layout_marginEnd="@dimen/margin_24dp"
-                style="@style/AddBeerButton"
+                style="@style/AppButton.WhiteOnYellow"
                 android:text="@string/search_add_beer_text"
                 app:layout_constraintTop_toBottomOf="@id/descriptionNotFound"
                 app:layout_constraintBottom_toBottomOf="parent"
