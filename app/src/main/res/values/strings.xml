@@ -24,5 +24,8 @@
     <string name="beer_card_ibu_title">%d IBU</string>
     <string name="beer_card_ibu_description">International Bitterness Unit</string>
     <string name="beer_card_be_first_rate_btn">Be the first to rate this beer</string>
+    <string name="beer_card_canned_type">Canned beer</string>
+    <string name="beer_card_bottled_type">Bottled beer</string>
+    <string name="beer_card_tapped_type">Tapped beer</string>
 
 </resources>
