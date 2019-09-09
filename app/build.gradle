@@ -38,6 +38,7 @@ def retrofit2_version = "2.6.0"
 def okhttp3_version = "3.14.0"
 def glide_version = "4.9.0"
 def camerax_version = "1.0.0-alpha02"
+def circleimageview_version = "3.0.1"
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -117,8 +118,14 @@ dependencies {
      *
      * see https://developer.android.com/training/camerax
      */
-
     implementation "androidx.camera:camera-core:${camerax_version}"
     implementation "androidx.camera:camera-camera2:${camerax_version}"
+
+    /**
+     * CircleImageView
+     *
+     *  see https://github.com/hdodenhof/CircleImageView
+     */
+    implementation "de.hdodenhof:circleimageview:${circleimageview_version}"
 
 }
