@@ -3,6 +3,7 @@ package com.ilya4.beerplease.presentation.view.activity
 import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ilya4.beerplease.R
@@ -30,6 +31,7 @@ import com.ilya4.beerplease.utils.FragmentUtils.Companion.showHideTabFragment
 import com.ilya4.beerplease.utils.StackListManager.Companion.updateStackIndex
 import com.ilya4.beerplease.utils.StackListManager.Companion.updateStackToIndexFirst
 import com.ilya4.beerplease.utils.StackListManager.Companion.updateTabStackIndex
+import com.ilya4.beerplease.utils.Utils
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -87,10 +89,14 @@ class MainActivity: BaseActivity(), AMainMvpView  {
         showFragment(commonBundle, BeerCardFragment().newInstance(bundle, false))
     }
 
+    fun initOnScrollListener(nestedScrollView: NestedScrollView) {
+        Utils.initScrollListenerForBottomView(nestedScrollView, arrayOf(bottomBarWrapper, scanFab))
+    }
+
     private fun initKeyboardLayoutListener() {
         keyboardLayoutListener = ViewTreeObserver.OnGlobalLayoutListener{
             if (rootView.height > 0) {
-                val contentHeight = rootView.getHeight()
+                val contentHeight = rootView.height
 
                 if (!isKeyboardShown) {
                     if (contentHeight < prevContentHeight) {

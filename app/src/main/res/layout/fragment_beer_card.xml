@@ -6,12 +6,34 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <androidx.core.widget.NestedScrollView
+    <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/beerToolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="@dimen/height_64dp"
+            android:elevation="@dimen/elevation_5dp">
+
+        <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_64dp"
+                android:background="@color/colorPrimary"
+                app:titleTextColor="@color/text_color"
+                app:subtitleTextColor="@color/gray_text_btn"
+                app:navigationIcon="@drawable/ic_arrow_back_gray_24dp"
+                app:buttonGravity="center_vertical"
+                app:title="It's over 9000 passion fruit"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:subtitle="AF brew, Russia" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+            android:id="@+id/mainContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/mainContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

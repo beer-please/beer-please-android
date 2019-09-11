@@ -14,10 +14,6 @@ import com.google.android.material.animation.AnimationUtils
 class HideViewOnScrollWithMarginBottomBehavior<V: View>(context: Context?, attrs: AttributeSet?) :
     CoordinatorLayout.Behavior<V>(context, attrs) {
 
-    private val ENTER_ANIMATION_DURATION = 225
-    private val EXIT_ANIMATION_DURATION = 175
-    private val STATE_SCROLLED_DOWN = 1
-    private val STATE_SCROLLED_UP = 2
     private var height = 0
     private var currentState = 2
     private var currentAnimator: ViewPropertyAnimator? = null
