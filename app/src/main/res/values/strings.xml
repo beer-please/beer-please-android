@@ -28,4 +28,8 @@
     <string name="beer_card_bottled_type">Bottled beer</string>
     <string name="beer_card_tapped_type">Tapped beer</string>
 
+    <string name="beer_card_menu_suggest_changes">Suggest changes</string>
+    <string name="beer_card_menu_report_duplicate">Report a duplicate</string>
+    <string name="beer_card_menu_report_problem">Report a problem</string>
+
 </resources>

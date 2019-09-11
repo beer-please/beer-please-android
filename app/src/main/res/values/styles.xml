@@ -58,4 +58,26 @@
         <item name="android:textColor">@color/gray_text_btn</item>
         <item name="android:layout_marginStart">@dimen/margin_16dp</item>
     </style>
+
+    <style name="ToolbarTextStyle">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">@dimen/text_size_16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+    </style>
+
+    <style name="ToolbarTextStyle.Title">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+    <style name="ToolbarTextStyle.Subtitle">
+        <item name="android:textColor">@color/gray_text_btn</item>
+    </style>
+    <style name="Widget.MPM.Menu.CustomBackground">
+        <item name="android:popupBackground">@drawable/menu_background</item>
+        <item name="android:popupElevation">@dimen/elevation_5dp</item>
+        <item name="mpm_activeIconColor">@color/gray_text_btn</item>
+        <item name="android:textSize">@dimen/text_size_14sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
 </resources>

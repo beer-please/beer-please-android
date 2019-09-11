@@ -128,4 +128,11 @@ dependencies {
      */
     implementation "de.hdodenhof:circleimageview:${circleimageview_version}"
 
+    /**
+     * Material Popup Menu
+     *
+     * see https://github.com/zawadz88/MaterialPopupMenu
+     */
+    implementation 'com.github.zawadz88.materialpopupmenu:material-popup-menu:4.0.0'
+
 }
