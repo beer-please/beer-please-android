@@ -33,6 +33,7 @@
                 android:id="@+id/bottomNavigationView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:elevation="@dimen/elevation_5dp"
                 android:background="@color/colorPrimary"
                 app:menu="@menu/main_menu"
                 app:itemIconTint="@drawable/bottom_navigation_colors"

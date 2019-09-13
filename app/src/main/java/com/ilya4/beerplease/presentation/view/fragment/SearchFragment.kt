@@ -11,6 +11,7 @@ import com.ilya4.beerplease.R
 import com.ilya4.beerplease.domain.entity.search.SearchItem
 import com.ilya4.beerplease.presentation.presenter.FSearchPresenter
 import com.ilya4.beerplease.presentation.view.activity.MainActivity
+import com.ilya4.beerplease.presentation.view.activity.base.BaseActivity
 import com.ilya4.beerplease.presentation.view.adapter.SearchAdapter
 import com.ilya4.beerplease.presentation.view.adapter.SearchHistoryAdapter
 import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
@@ -81,6 +82,7 @@ class SearchFragment: BaseFragment(), FSearchMvpView, OnSearchHistoryItemClickLi
 
     override fun onSearchItemClick(searchItem: SearchItem) {
         val bundle = Bundle()
+        Utils.hideKeyboard(requireActivity() as BaseActivity, searchEt)
         (activity as MainActivity).showBeerCardFragment(getCurrentTab(), true, bundle)
     }
 
