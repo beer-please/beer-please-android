@@ -10,7 +10,9 @@ import com.ilya4.beerplease.presentation.presenter.FBeerCardPresenter
 import com.ilya4.beerplease.presentation.view.activity.MainActivity
 import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
 import com.ilya4.beerplease.presentation.view.view.FBeerCardMvpView
+import com.ilya4.beerplease.utils.ViewUtils
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.beer_specification_layout.*
 import kotlinx.android.synthetic.main.fragment_beer_card.*
 import javax.inject.Inject
 
@@ -34,6 +36,7 @@ class BeerCardFragment: BaseFragment(), FBeerCardMvpView {
 
         fixHideBottomBarOnScroll()
         initToolbar()
+        initOnClickListeners()
     }
 
     private fun fixHideBottomBarOnScroll() {
@@ -56,8 +59,10 @@ class BeerCardFragment: BaseFragment(), FBeerCardMvpView {
     }
 
     private fun showPopupMainMenu() {
+        val horizontalOffsetInPixels = ViewUtils.convertDpToPixel(192f, requireContext())
         val popupMenu = popupMenu {
             style = R.style.Widget_MPM_Menu_CustomBackground
+            dropDownHorizontalOffset = -horizontalOffsetInPixels.toInt()
             section {
                 item {
                     label = getString(R.string.beer_card_menu_suggest_changes)
@@ -75,6 +80,15 @@ class BeerCardFragment: BaseFragment(), FBeerCardMvpView {
         }
         if (context != null)
             popupMenu.show(context!!, beerToolbar[3])
+    }
+
+    private fun initOnClickListeners() {
+        beerSpecInfoBtn.setOnClickListener { showBeerSpecificationDescription(true) }
+        descriptionBeerSpec.setOnClickListener { showBeerSpecificationDescription(false) }
+    }
+
+    private fun showBeerSpecificationDescription(show: Boolean) {
+        descriptionBeerSpec.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     companion object {
