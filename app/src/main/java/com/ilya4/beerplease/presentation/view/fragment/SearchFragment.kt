@@ -124,6 +124,12 @@ class SearchFragment: BaseFragment(), FSearchMvpView, OnSearchHistoryItemClickLi
             if (searchEt.text.toString() == "")
                 presenter.requestShowSearchHistory()
         }
+        addBeerButton.setOnClickListener {
+            val activity = activity as MainActivity
+            val bundle = Bundle()
+            Utils.hideKeyboard(requireActivity() as BaseActivity, searchEt)
+            activity.showAddNewBeerFragment(getCurrentTab(),true, bundle)
+        }
     }
 
     companion object{

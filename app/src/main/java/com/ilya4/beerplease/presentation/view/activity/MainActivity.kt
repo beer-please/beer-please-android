@@ -14,6 +14,7 @@ import com.ilya4.beerplease.presentation.app.Constants.TAB_PROFILE
 import com.ilya4.beerplease.presentation.app.Constants.TAB_SEARCH
 import com.ilya4.beerplease.presentation.presenter.AMainPresenter
 import com.ilya4.beerplease.presentation.view.activity.base.BaseActivity
+import com.ilya4.beerplease.presentation.view.fragment.AddNewBeerFragment
 import com.ilya4.beerplease.presentation.view.fragment.BeerCardFragment
 import com.ilya4.beerplease.presentation.view.view.AMainMvpView
 import dagger.android.AndroidInjection
@@ -87,6 +88,13 @@ class MainActivity: BaseActivity(), AMainMvpView  {
         commonBundle.putString(DATA_KEY_1, tab)
         commonBundle.putBoolean(DATA_KEY_2, addToBackStack)
         showFragment(commonBundle, BeerCardFragment().newInstance(bundle, false))
+    }
+
+    fun showAddNewBeerFragment(tab: String, addToBackStack: Boolean, bundle: Bundle) {
+        val commonBundle = Bundle()
+        commonBundle.putString(DATA_KEY_1, tab)
+        commonBundle.putBoolean(DATA_KEY_2, addToBackStack)
+        showFragment(commonBundle, AddNewBeerFragment().newInstance(bundle, false))
     }
 
     fun initOnScrollListener(nestedScrollView: NestedScrollView) {
