@@ -32,4 +32,6 @@
     <string name="beer_card_menu_report_duplicate">Report a duplicate</string>
     <string name="beer_card_menu_report_problem">Report a problem</string>
 
+    <string name="add_new_beer_title">Add new beer</string>
+
 </resources>
