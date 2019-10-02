@@ -7,9 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.ilya4.beerplease.R
 import com.ilya4.beerplease.presentation.presenter.FAddNewBeerPresenter
+import com.ilya4.beerplease.presentation.view.activity.MainActivity
 import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
 import com.ilya4.beerplease.presentation.view.view.FAddNewBeerMvpView
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.fragment_add_new_beer.*
+import kotlinx.android.synthetic.main.fragment_beer_card.*
+import kotlinx.android.synthetic.main.fragment_beer_card.mainContent
 import javax.inject.Inject
 
 class AddNewBeerFragment: BaseFragment(), FAddNewBeerMvpView {
@@ -33,5 +37,18 @@ class AddNewBeerFragment: BaseFragment(), FAddNewBeerMvpView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.init()
+
+        fixHideBottomBarOnScroll()
+        initToolbar()
+    }
+
+    private fun fixHideBottomBarOnScroll() {
+        val activity = activity as MainActivity
+        activity.initOnScrollListener(mainContent)
+    }
+
+    private fun initToolbar() {
+        addBeerToolbar.setNavigationOnClickListener {  activity?.onBackPressed()}
+
     }
 }

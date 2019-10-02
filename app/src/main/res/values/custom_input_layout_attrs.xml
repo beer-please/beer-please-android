@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomInputLayout">
+        <attr name="cil_active_drawable" format="reference"/>
+        <attr name="cil_nonactive_drawable" format="reference"/>
+        <attr name="cil_main_hint_title" format="string"/>
+        <attr name="cil_bottom_hint" format="string"/>
+    </declare-styleable>
+</resources>

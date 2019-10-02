@@ -47,6 +47,69 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
+            <com.ilya4.beerplease.presentation.view.custom.CustomInputLayout
+                    android:id="@+id/beerNameInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_32dp"
+                    app:cil_active_drawable="@drawable/ic_beer_name_active"
+                    app:cil_nonactive_drawable="@drawable/ic_beer_name_nonactive"
+                    app:cil_bottom_hint="@string/add_new_beer_beername_bhint"
+                    app:cil_main_hint_title="@string/add_new_beer_beername_hint"
+                    app:layout_constraintTop_toBottomOf="@id/mainImage" />
+
+            <com.ilya4.beerplease.presentation.view.custom.CustomInputLayout
+                    android:id="@+id/breweryNameInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cil_active_drawable="@drawable/ic_brewery_active"
+                    app:cil_nonactive_drawable="@drawable/ic_brewery_name_nonactive"
+                    app:cil_bottom_hint="@string/add_new_beer_brewery_bhint"
+                    app:cil_main_hint_title="@string/add_new_beer_brewery_hint"
+                    app:layout_constraintTop_toBottomOf="@id/beerNameInput" />
+            <com.ilya4.beerplease.presentation.view.custom.CustomInputLayout
+                    android:id="@+id/styleInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cil_active_drawable="@drawable/ic_style_choose_active"
+                    app:cil_nonactive_drawable="@drawable/ic_style_choose_nonactive"
+                    app:cil_bottom_hint="@string/add_new_beer_style_bhint"
+                    app:cil_main_hint_title="@string/add_new_beer_style_hint"
+                    app:layout_constraintTop_toBottomOf="@id/breweryNameInput" />
+            <com.ilya4.beerplease.presentation.view.custom.CustomInputLayout
+                    android:id="@+id/abvInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cil_active_drawable="@drawable/ic_abv_active"
+                    app:cil_nonactive_drawable="@drawable/ic_abv_nonactive"
+                    app:cil_bottom_hint="@string/add_new_beer_alcohol_bhint"
+                    app:cil_main_hint_title="@string/add_new_beer_alcohol_hint"
+                    app:layout_constraintTop_toBottomOf="@id/styleInput" />
+            <com.ilya4.beerplease.presentation.view.custom.CustomInputLayout
+                    android:id="@+id/ibuInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cil_active_drawable="@drawable/ic_ibu_active"
+                    app:cil_nonactive_drawable="@drawable/ic_ibu_nonactive"
+                    app:cil_bottom_hint="@string/add_new_beer_ibu_bhint"
+                    app:cil_main_hint_title="@string/add_new_beer_ibu_hint"
+                    app:layout_constraintTop_toBottomOf="@id/abvInput" />
+
+            <Button
+                    android:id="@+id/addNewBeerBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/AppButton.WhiteOnYellow"
+                    android:layout_marginStart="@dimen/margin_16dp"
+                    android:layout_marginEnd="@dimen/margin_16dp"
+                    android:layout_marginTop="@dimen/margin_32dp"
+                    android:layout_marginBottom="@dimen/margin_42dp"
+                    android:text="@string/add_new_beer_title"
+                    app:layout_constraintTop_toBottomOf="@id/ibuInput"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

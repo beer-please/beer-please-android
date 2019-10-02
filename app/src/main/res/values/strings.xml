@@ -33,5 +33,16 @@
     <string name="beer_card_menu_report_problem">Report a problem</string>
 
     <string name="add_new_beer_title">Add new beer</string>
+    <string name="add_new_beer_beername_hint">Beer name</string>
+    <string name="add_new_beer_beername_bhint">Don`t include the brewery name</string>
+    <string name="add_new_beer_brewery_hint">Brewery*</string>
+    <string name="add_new_beer_brewery_bhint">Search</string>
+    <string name="add_new_beer_style_hint">Style*</string>
+    <string name="add_new_beer_style_bhint">Pick only one style</string>
+    <string name="add_new_beer_alcohol_hint">Alcohol*, %</string>
+    <string name="add_new_beer_alcohol_bhint">Alcohol by Volume (Ex. 4,2)</string>
+    <string name="add_new_beer_ibu_hint">IBU</string>
+    <string name="add_new_beer_ibu_bhint">International Bitterness Unit (Ex. 100)</string>
+
 
 </resources>
