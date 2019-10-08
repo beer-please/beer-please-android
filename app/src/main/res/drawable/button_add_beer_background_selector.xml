@@ -3,6 +3,8 @@
         android:color="?android:attr/colorControlHighlight">
     <item>
         <selector>
+            <item android:state_enabled="false"
+                android:drawable="@drawable/button_add_beer_background_disable"/>
             <item
                     android:drawable="@drawable/button_add_beer_background_pressed"
                     android:state_pressed="true" />

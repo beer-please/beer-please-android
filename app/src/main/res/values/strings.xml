@@ -40,7 +40,7 @@
     <string name="add_new_beer_style_hint">Style*</string>
     <string name="add_new_beer_style_bhint">Pick only one style</string>
     <string name="add_new_beer_alcohol_hint">Alcohol*, %</string>
-    <string name="add_new_beer_alcohol_bhint">Alcohol by Volume (Ex. 4,2)</string>
+    <string name="add_new_beer_alcohol_bhint">Alcohol by Volume (Ex. 4.2)</string>
     <string name="add_new_beer_ibu_hint">IBU</string>
     <string name="add_new_beer_ibu_bhint">International Bitterness Unit (Ex. 100)</string>
 

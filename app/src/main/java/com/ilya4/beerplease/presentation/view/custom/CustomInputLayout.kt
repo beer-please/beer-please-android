@@ -42,23 +42,32 @@ class CustomInputLayout: ConstraintLayout {
             typedArray.getDrawable(R.styleable.CustomInputLayout_cil_active_drawable) else return)
         setNonactiveDrawable(if (typedArray.hasValue(R.styleable.CustomInputLayout_cil_nonactive_drawable))
             typedArray.getDrawable(R.styleable.CustomInputLayout_cil_nonactive_drawable) else return)
+        setInputType(typedArray.getInt(R.styleable.CustomInputLayout_cil_input_type, 0))
 
         typedArray?.recycle()
 
         setDefaultImage()
         initFocusListener()
-        textInputEditText.inputType = InputType.TYPE_CLASS_TEXT // TODO
     }
 
     private fun setTitleHint(hint: String) {
         hint.let {
-            textInputLayout.hint = hint
+            topHintText.text = hint
+            textInputEditText.hint = hint
         }
     }
 
     private fun setBottomHint(bottomHint: String) {
         bottomHint.let {
             bottomHintText.text = bottomHint
+        }
+    }
+
+    private fun setInputType(value: Int) {
+        when (value) {
+            0 -> textInputEditText.inputType = InputType.TYPE_CLASS_TEXT
+            1 -> textInputEditText.inputType = InputType.TYPE_CLASS_NUMBER
+            2 -> textInputEditText.inputType = InputType.TYPE_CLASS_NUMBER + InputType.TYPE_NUMBER_FLAG_DECIMAL
         }
     }
 
@@ -77,6 +86,10 @@ class CustomInputLayout: ConstraintLayout {
     }
 
     private fun initFocusListener() {
+        topHintText.setOnClickListener { textInputEditText.requestFocus() }
+        bottomHintText.setOnClickListener { textInputEditText.requestFocus() }
+        this.setOnClickListener { textInputEditText.requestFocus() }
+
         textInputEditText.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus || checkIfTextNotEmpty()) {
                 onFocusEditText()
@@ -89,12 +102,14 @@ class CustomInputLayout: ConstraintLayout {
     private fun checkIfTextNotEmpty(): Boolean = !TextUtils.isEmpty(textInputEditText.editableText)
 
     private fun onFocusEditText() {
-        bottomHintText.visibility = View.INVISIBLE
+        bottomHintText.visibility = View.GONE
+        topHintText.visibility = View.VISIBLE
         imageInput.setImageDrawable(thisActiveDrawable)
     }
 
     private fun onDefocusEditText() {
         bottomHintText.visibility = View.VISIBLE
+        topHintText.visibility = View.GONE
         imageInput.setImageDrawable(thisNonactiveDrawable)
     }
 }

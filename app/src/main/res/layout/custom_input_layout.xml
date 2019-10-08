@@ -11,46 +11,57 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_16dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/textInputLayout"
+            app:layout_constraintTop_toTopOf="@id/topHintText"
             app:layout_constraintBottom_toBottomOf="@id/bottomHintText"
             tools:src="@drawable/ic_beer_name_nonactive" />
 
-    <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout"
+    <TextView
+            android:id="@+id/topHintText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_20dp"
-            android:layout_marginBottom="@dimen/margin_8dp"
+            android:textSize="@dimen/text_size_12sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/gray_text_btn"
+            android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imageInput"
+            app:layout_constraintStart_toEndOf="@id/guideline"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/bottomHintText"
-            tools:hint="@string/add_new_beer_beername_hint">
+            tools:text="@string/add_new_beer_beername_bhint" />
 
-        <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:lines="1"
-                android:maxLines="1"
-                android:paddingTop="@dimen/text_size_8sp"
-                android:textSize="@dimen/text_size_16sp"
-                android:fontFamily="sans-serif"
-                android:lineSpacingExtra="@dimen/text_size_8sp"
-                android:background="@color/transparent" />
-    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:maxLines="1"
+            android:paddingTop="@dimen/text_size_8sp"
+            android:textSize="@dimen/text_size_16sp"
+            android:fontFamily="sans-serif"
+            android:lineSpacingExtra="@dimen/text_size_8sp"
+            android:background="@color/transparent"
+            android:layout_marginBottom="@dimen/margin_8dp"
+            app:layout_constraintTop_toBottomOf="@id/topHintText"
+            app:layout_constraintStart_toEndOf="@id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/bottomHintText"/>
 
     <TextView
             android:id="@+id/bottomHintText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_20dp"
             android:textSize="@dimen/text_size_12sp"
             android:fontFamily="sans-serif"
             android:textColor="@color/gray_text_btn"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imageInput"
+            app:layout_constraintStart_toEndOf="@id/guideline"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="@string/add_new_beer_beername_bhint" />
+
+    <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="54dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
