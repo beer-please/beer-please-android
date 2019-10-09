@@ -36,6 +36,7 @@ class AddNewBeerFragment: BaseFragment(), FAddNewBeerMvpView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupOnClickListeners()
         presenter.init()
 
         fixHideBottomBarOnScroll()
@@ -49,6 +50,13 @@ class AddNewBeerFragment: BaseFragment(), FAddNewBeerMvpView {
 
     private fun initToolbar() {
         addBeerToolbar.setNavigationOnClickListener {  activity?.onBackPressed()}
+    }
 
+    private fun setupOnClickListeners() {
+        styleInput.setOnClickListener {
+            val activity = activity as MainActivity
+            val bundle = Bundle()
+            activity.showChooseBeerStyleFragment(getCurrentTab(), true, bundle)
+        }
     }
 }

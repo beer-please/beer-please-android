@@ -14,15 +14,12 @@ import com.ilya4.beerplease.presentation.app.Constants.TAB_PROFILE
 import com.ilya4.beerplease.presentation.app.Constants.TAB_SEARCH
 import com.ilya4.beerplease.presentation.presenter.AMainPresenter
 import com.ilya4.beerplease.presentation.view.activity.base.BaseActivity
-import com.ilya4.beerplease.presentation.view.fragment.AddNewBeerFragment
-import com.ilya4.beerplease.presentation.view.fragment.BeerCardFragment
+import com.ilya4.beerplease.presentation.view.fragment.*
 import com.ilya4.beerplease.presentation.view.view.AMainMvpView
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
 
-import com.ilya4.beerplease.presentation.view.fragment.SearchFragment
-import com.ilya4.beerplease.presentation.view.fragment.UserProfileFragment
 import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
 import com.ilya4.beerplease.utils.FragmentUtils.Companion.addAdditionalTabFragment
 import com.ilya4.beerplease.utils.FragmentUtils.Companion.addInitialTabFragment
@@ -95,6 +92,13 @@ class MainActivity: BaseActivity(), AMainMvpView  {
         commonBundle.putString(DATA_KEY_1, tab)
         commonBundle.putBoolean(DATA_KEY_2, addToBackStack)
         showFragment(commonBundle, AddNewBeerFragment().newInstance(bundle, false))
+    }
+
+    fun showChooseBeerStyleFragment(tab: String, addToBackStack: Boolean, bundle: Bundle) {
+        val commonBundle = Bundle()
+        commonBundle.putString(DATA_KEY_1, tab)
+        commonBundle.putBoolean(DATA_KEY_2, addToBackStack)
+        showFragment(commonBundle, ChooseBeerStyleFragment().newInstance(bundle, false))
     }
 
     fun initOnScrollListener(nestedScrollView: NestedScrollView) {
