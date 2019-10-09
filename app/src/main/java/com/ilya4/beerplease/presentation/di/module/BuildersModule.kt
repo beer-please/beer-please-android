@@ -33,4 +33,6 @@ abstract class BuildersModule {
     abstract fun bindAddNewBeerFragment(): AddNewBeerFragment
     @ContributesAndroidInjector(modules = [ChooseBeerStyleViewModule::class, ChooseBeerStyleModule::class])
     abstract fun bindChooseBeerStyleFragment(): ChooseBeerStyleFragment
+    @ContributesAndroidInjector(modules = [ChooseBreweryViewModule::class, ChooseBreweryModule::class])
+    abstract fun bindChooseBreweryFragment(): ChooseBreweryFragment
 }
