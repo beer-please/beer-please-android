@@ -74,7 +74,7 @@ class FSearchPresenter(view: FSearchMvpView,
     inner class SearchObserver: DefaultObserver<SearchUseCase.Result>() {
         override fun onNext(result: SearchUseCase.Result) {
             if (result.searchResult != null && result.searchResult.isNotEmpty()) {
-                view.updateSearchResults(result.searchResult)
+              //  view.updateSearchResults(result.searchResult)
                 view.showResultNotFound(false)
             } else {
                 view.clearSearchResults()

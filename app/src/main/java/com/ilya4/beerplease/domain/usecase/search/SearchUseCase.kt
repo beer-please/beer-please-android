@@ -1,22 +1,24 @@
 package com.ilya4.beerplease.domain.usecase.search
 
 import com.ilya4.beerplease.data.io.model.AsyncData
+import com.ilya4.beerplease.domain.entity.Beer
 import com.ilya4.beerplease.domain.entity.RestError
-import com.ilya4.beerplease.domain.entity.search.SearchItem
 import com.ilya4.beerplease.domain.executor.PostExecutionThread
 import com.ilya4.beerplease.domain.executor.ThreadExecutor
 import com.ilya4.beerplease.domain.usecase.UseCase
+import com.ilya4.beerplease.presentation.app.RestManager
 import io.reactivex.Observable
 import javax.inject.Inject
 
 class SearchUseCase @Inject constructor(threadExecutor: ThreadExecutor,
-                                        postExecutionThread: PostExecutionThread):
+                                        postExecutionThread: PostExecutionThread,
+                                        private val restManager: RestManager):
     UseCase<SearchUseCase.Result, SearchUseCase.Params>(threadExecutor, postExecutionThread) {
 
     override fun buildUseCaseObservable(params: Params): Observable<Result> {
         return Observable.create {subscriber ->
-            val asyncData = object: AsyncData<List<SearchItem>> {
-                override fun onSuccess(data: List<SearchItem>) {
+            val asyncData = object: AsyncData<List<Beer>> {
+                override fun onSuccess(data: List<Beer>) {
                     if (!subscriber.isDisposed) {
                         subscriber.onNext(Result(null, data))
                         subscriber.onComplete()
@@ -37,21 +39,17 @@ class SearchUseCase @Inject constructor(threadExecutor: ThreadExecutor,
                     }
                 }
             }
-            getMockSearchResult(params.query, asyncData)
+            restManager.searchBeers(params.query, params.page, params.sizePage, asyncData)
         }
     }
 
-    private fun getMockSearchResult(query: String, asyncData: AsyncData<List<SearchItem>>){
-        val list = SearchItem.getListSearchItems()
-        asyncData.onSuccess(list.filter { it.name.contains(query, true) })
-    }
-
-    class Params(val query: String) {
+    class Params(val query: String, val page: Int, val sizePage: Int) {
         companion object {
-            fun forSearchBeers(query: String) : Params = Params(query)
+            fun forSearchBeers(query: String, page: Int, sizePage: Int) : Params = Params(query, page, sizePage)
+            fun forSearchBeers(query: String): Params = Params(query, 1, 10)
         }
     }
 
     open class Result(val errorMessage: String?,
-                      val searchResult: List<SearchItem>?)
+                      val searchResult: List<Beer>?)
 }
