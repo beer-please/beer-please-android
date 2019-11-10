@@ -16,6 +16,7 @@ import com.ilya4.beerplease.presentation.di.module.StorageModule
 import com.michaelflisar.rxbus2.interfaces.IRxBusQueue
 import dagger.android.*
 import io.reactivex.processors.BehaviorProcessor
+import moxy.MvpFacade
 import org.reactivestreams.Publisher
 import timber.log.Timber
 import javax.inject.Inject
@@ -46,6 +47,7 @@ class BeerPleaseApp : Application(), IRxBusQueue, HasActivityInjector, HasServic
         behaviorProcessor.onNext(true)
         appContext = applicationContext
         initTimber()
+        MvpFacade.init()
     }
 
     fun createComponent() : AppComponent{

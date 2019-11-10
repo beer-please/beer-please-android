@@ -18,14 +18,17 @@
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="adjustResize"
                 >
+        </activity>
+        <activity android:name=".presentation.view.activity.FindProfileBeerByBarcodeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".presentation.moxy.view.activity.MoxyActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
         </activity>
-        <activity android:name=".presentation.view.activity.FindProfileBeerByBarcodeActivity"
-            android:screenOrientation="portrait"/>
         <meta-data
                 android:name="com.google.firebase.ml.vision.DEPENDENCIES"
                 android:value="barcode" />

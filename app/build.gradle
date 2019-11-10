@@ -39,6 +39,7 @@ def okhttp3_version = "3.14.0"
 def glide_version = "4.9.0"
 def camerax_version = "1.0.0-alpha02"
 def circleimageview_version = "3.0.1"
+def moxy_version = "2.0.2"
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -134,5 +135,14 @@ dependencies {
      * see https://github.com/zawadz88/MaterialPopupMenu
      */
     implementation 'com.github.zawadz88.materialpopupmenu:material-popup-menu:4.0.0'
+
+    /**
+     * MVP Moxy
+     *
+     * see https://github.com/moxy-community/Moxy
+     */
+    implementation "com.github.moxy-community:moxy:$moxy_version"
+    kapt "com.github.moxy-community:moxy-compiler:$moxy_version"
+    implementation "com.github.moxy-community:moxy-androidx:$moxy_version"
 
 }
