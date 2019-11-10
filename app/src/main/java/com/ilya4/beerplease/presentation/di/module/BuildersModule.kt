@@ -2,10 +2,12 @@ package com.ilya4.beerplease.presentation.di.module
 
 import com.ilya4.beerplease.presentation.di.module.activity.FindProfileBeerByBarcodeModule
 import com.ilya4.beerplease.presentation.di.module.activity.MainModule
+import com.ilya4.beerplease.presentation.di.module.activity.MoxyModule
 import com.ilya4.beerplease.presentation.di.module.fragment.*
 import com.ilya4.beerplease.presentation.di.module.view.activity.FindProfileBeerByBarcodeViewModule
 import com.ilya4.beerplease.presentation.di.module.view.activity.MainViewModule
 import com.ilya4.beerplease.presentation.di.module.view.fragment.*
+import com.ilya4.beerplease.presentation.moxy.view.activity.MoxyActivity
 import com.ilya4.beerplease.presentation.view.activity.FindProfileBeerByBarcodeActivity
 import com.ilya4.beerplease.presentation.view.activity.MainActivity
 import com.ilya4.beerplease.presentation.view.fragment.*
@@ -35,4 +37,8 @@ abstract class BuildersModule {
     abstract fun bindChooseBeerStyleFragment(): ChooseBeerStyleFragment
     @ContributesAndroidInjector(modules = [ChooseBreweryViewModule::class, ChooseBreweryModule::class])
     abstract fun bindChooseBreweryFragment(): ChooseBreweryFragment
+
+
+    @ContributesAndroidInjector(modules = [MoxyModule::class])
+    abstract fun bindMoxyActivity(): MoxyActivity
 }
