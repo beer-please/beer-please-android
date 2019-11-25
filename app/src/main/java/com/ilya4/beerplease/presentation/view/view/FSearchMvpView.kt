@@ -1,7 +1,11 @@
 package com.ilya4.beerplease.presentation.view.view
 
 import com.ilya4.beerplease.domain.entity.search.SearchItem
+import moxy.MvpView
+import moxy.viewstate.strategy.AddToEndSingleStrategy
+import moxy.viewstate.strategy.StateStrategyType
 
+@StateStrategyType(AddToEndSingleStrategy::class)
 interface FSearchMvpView: MvpView {
     fun updateSearchResults(searchResults: List<SearchItem>)
     fun clearSearchResults()

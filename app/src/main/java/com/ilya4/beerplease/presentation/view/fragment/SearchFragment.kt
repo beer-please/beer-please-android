@@ -21,14 +21,20 @@ import com.ilya4.beerplease.presentation.view.view.FSearchMvpView
 import com.ilya4.beerplease.utils.Utils
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_search.*
-import javax.inject.Inject
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 
-class SearchFragment: BaseFragment(), FSearchMvpView, OnSearchHistoryItemClickListener, OnSearchItemClickListener {
+class SearchFragment: BaseFragment<FSearchPresenter>(R.layout.fragment_search), FSearchMvpView, OnSearchHistoryItemClickListener, OnSearchItemClickListener {
 
-    @Inject
+    @InjectPresenter
     lateinit var presenter: FSearchPresenter
+    @ProvidePresenter
+    override fun providePresenter(): FSearchPresenter {
+        return super.providePresenter()
+    }
 
     private val searchAdapter = SearchAdapter(this)
+
     private val searchHistoryAdapter = SearchHistoryAdapter(this)
 
     override fun onAttach(context: Context) {
@@ -36,13 +42,8 @@ class SearchFragment: BaseFragment(), FSearchMvpView, OnSearchHistoryItemClickLi
         super.onAttach(context)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_search, container, false)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.init()
         initSearch()
         initRecyclerView()
         initButtonListeners()

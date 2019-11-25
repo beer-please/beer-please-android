@@ -5,12 +5,28 @@ import android.os.Bundle;
 import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+
+import javax.inject.Inject;
+
+import dagger.Lazy;
+import moxy.MvpAppCompatFragment;
+import moxy.MvpPresenter;
 
 import static com.ilya4.beerplease.presentation.app.Constants.EXTRA_IS_ROOT_FRAGMENT;
 
 
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment<Presenter extends MvpPresenter> extends MvpAppCompatFragment {
+
+    @Inject
+    protected Lazy<Presenter> daggerPresenter;
+
+    protected Presenter providePresenter() {
+        return daggerPresenter.get();
+    }
+
+    public BaseFragment(int contentLayoutId) {
+        super(contentLayoutId);
+    }
 
     protected FragmentInteractionCallback fragmentInteractionCallback;
     protected static String currentTab;

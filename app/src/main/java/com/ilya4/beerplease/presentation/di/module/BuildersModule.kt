@@ -22,23 +22,24 @@ abstract class BuildersModule {
     @ContributesAndroidInjector(modules = [FindProfileBeerByBarcodeViewModule::class, FindProfileBeerByBarcodeModule::class])
     abstract fun bindFindProfileBeerByBarcodeActivity(): FindProfileBeerByBarcodeActivity
 
-    //fragment
-    @ContributesAndroidInjector(modules = [ScanBarcodeViewModule::class, ScanBarcodeModule::class])
-    abstract fun bindScanBarcodeFragment() : ScanBarcodeFragment
-    @ContributesAndroidInjector(modules = [SearchViewModule::class, SearchModule::class])
-    abstract fun bindSearchFragment(): SearchFragment
-    @ContributesAndroidInjector(modules = [UserProfileViewModule::class, UserProfileModule::class])
-    abstract fun bindUserProfileFragment(): UserProfileFragment
-    @ContributesAndroidInjector(modules = [BeerCardViewModule::class, BeerCardModule::class])
-    abstract fun bindBeerCardFragment(): BeerCardFragment
-    @ContributesAndroidInjector(modules = [AddNewBeerViewModule::class, AddNewBeerModule::class])
-    abstract fun bindAddNewBeerFragment(): AddNewBeerFragment
-    @ContributesAndroidInjector(modules = [ChooseBeerStyleViewModule::class, ChooseBeerStyleModule::class])
-    abstract fun bindChooseBeerStyleFragment(): ChooseBeerStyleFragment
-    @ContributesAndroidInjector(modules = [ChooseBreweryViewModule::class, ChooseBreweryModule::class])
-    abstract fun bindChooseBreweryFragment(): ChooseBreweryFragment
-
-
+    //moxy activity
     @ContributesAndroidInjector(modules = [MoxyModule::class])
     abstract fun bindMoxyActivity(): MoxyActivity
+
+    //fragment
+    @ContributesAndroidInjector(modules = [SearchModule::class])
+    abstract fun bindSearchFragment(): SearchFragment
+    @ContributesAndroidInjector(modules = [UserProfileModule::class])
+    abstract fun bindUserProfileFragment(): UserProfileFragment
+    @ContributesAndroidInjector(modules = [ScanBarcodeModule::class])
+    abstract fun bindScanBarcodeFragment() : ScanBarcodeFragment
+    @ContributesAndroidInjector(modules = [ChooseBeerStyleModule::class])
+    abstract fun bindChooseBeerStyleFragment(): ChooseBeerStyleFragment
+    @ContributesAndroidInjector(modules = [ChooseBreweryModule::class])
+    abstract fun bindChooseBreweryFragment(): ChooseBreweryFragment
+    @ContributesAndroidInjector(modules = [BeerCardModule::class])
+    abstract fun bindBeerCardFragment(): BeerCardFragment
+    @ContributesAndroidInjector(modules = [AddNewBeerModule::class])
+    abstract fun bindAddNewBeerFragment(): AddNewBeerFragment
+
 }

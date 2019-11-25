@@ -1,4 +1,5 @@
 package com.ilya4.beerplease.presentation.view.view
 
-interface FBeerCardMvpView: MvpView {
-}
+import moxy.MvpView
+
+interface FBeerCardMvpView: MvpView

@@ -7,21 +7,12 @@ import com.ilya4.beerplease.presentation.view.view.MvpView
 import com.michaelflisar.rxbus2.interfaces.IRxBusQueue
 import com.michaelflisar.rxbus2.rx.RxDisposableManager
 import io.reactivex.processors.BehaviorProcessor
+import moxy.MvpPresenter
 import org.reactivestreams.Publisher
 
 abstract class BasePresenter<V : MvpView> (val view : V, val behaviorProcessor: BehaviorProcessor<Boolean>) :
     IRxBusQueue {
-    protected val activity : BaseActivity
-    protected lateinit var fragment : BaseFragment
-    init {
 
-        if (view is BaseFragment) {
-            activity = (view as BaseFragment).activity as BaseActivity
-            fragment = view
-        }
-        else
-            activity = view as BaseActivity
-    }
     override fun isBusResumed(): Boolean = behaviorProcessor.value ?: false
 
     override fun getResumeObservable(): Publisher<Boolean> = behaviorProcessor
@@ -31,12 +22,12 @@ abstract class BasePresenter<V : MvpView> (val view : V, val behaviorProcessor: 
     protected abstract fun bindEvents(activity: BaseActivity)
 
     private fun unbindEvents() {
-        RxDisposableManager.unsubscribe(activity)
+    //    RxDisposableManager.unsubscribe(activity)
     }
 
     private fun rebindEvents() {
         unbindEvents()
-        bindEvents(activity)
+        //bindEvents(activity)
     }
 
     open fun start() {

@@ -11,8 +11,5 @@ import io.reactivex.processors.BehaviorProcessor
 class UserProfileModule {
 
     @Provides
-    fun provideFUserProfilePresenter(view: FUserProfileMvpView,
-                                     behaviorProcessor: BehaviorProcessor<Boolean>): FUserProfilePresenter {
-        return FUserProfilePresenter(view, behaviorProcessor)
-    }
+    fun provideFUserProfilePresenter(): FUserProfilePresenter = FUserProfilePresenter()
 }

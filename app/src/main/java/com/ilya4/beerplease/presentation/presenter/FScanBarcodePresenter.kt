@@ -10,33 +10,21 @@ import androidx.camera.core.PreviewConfig
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetector
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata
+import com.ilya4.beerplease.presentation.presenter.base.BaseMvpPresenter
 import com.ilya4.beerplease.presentation.view.activity.base.BaseActivity
 import com.ilya4.beerplease.presentation.view.view.FScanBarcodeMvpView
 import io.reactivex.processors.BehaviorProcessor
 import com.ilya4.beerplease.utils.PermissionHelper.mayRequestCamera
+import moxy.InjectViewState
+import moxy.MvpPresenter
 import java.util.concurrent.TimeUnit
 
-class FScanBarcodePresenter(view: FScanBarcodeMvpView,
-                            behaviorProcessor: BehaviorProcessor<Boolean>,
-                            private val detector: FirebaseVisionBarcodeDetector):
-    BasePresenter<FScanBarcodeMvpView>(view, behaviorProcessor) {
+@InjectViewState
+class FScanBarcodePresenter(private val detector: FirebaseVisionBarcodeDetector):
+    MvpPresenter<FScanBarcodeMvpView>() {
 
     private val lastAnalyzedStamp = 0L
     private lateinit var preview: Preview
-
-    override fun init(): Boolean {
-        requestCameraPermission()
-        return false
-    }
-
-    override fun bindEvents(activity: BaseActivity) {
-
-    }
-
-    fun requestCameraPermission() {
-        if (mayRequestCamera(activity, fragment, null))
-            view.initCamera()
-    }
 
     fun requestStartCamera() {
         val previewConfig = PreviewConfig.Builder().apply {
@@ -64,7 +52,7 @@ class FScanBarcodePresenter(view: FScanBarcodeMvpView,
             }
         }
         preview = Preview(previewConfig)
-        view.startCamera(preview, imageAnalysis)
+        viewState.startCamera(preview, imageAnalysis)
     }
 
     fun torchOn(enableTorch: Boolean) {
@@ -74,7 +62,7 @@ class FScanBarcodePresenter(view: FScanBarcodeMvpView,
     private fun runBarcodeScanner(image: FirebaseVisionImage) {
         detector.detectInImage(image).addOnSuccessListener { barcodeList ->
             barcodeList.forEach { _->
-                barcodeList[0].rawValue?.let { view.showBarcodeToast(it) }
+                barcodeList[0].rawValue?.let { viewState.showBarcodeToast(it) }
             }
         }
     }

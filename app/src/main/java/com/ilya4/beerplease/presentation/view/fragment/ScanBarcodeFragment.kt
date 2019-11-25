@@ -11,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.Surface
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.camera.core.CameraX
 import androidx.camera.core.ImageAnalysis
@@ -20,17 +19,26 @@ import androidx.lifecycle.LifecycleOwner
 import com.ilya4.beerplease.R
 import com.ilya4.beerplease.presentation.app.Constants.REQUEST_CAMERA
 import com.ilya4.beerplease.presentation.presenter.FScanBarcodePresenter
+import com.ilya4.beerplease.presentation.view.activity.base.BaseActivity
 import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
 import com.ilya4.beerplease.presentation.view.view.FScanBarcodeMvpView
 import com.ilya4.beerplease.utils.PermissionHelper
+import com.ilya4.beerplease.utils.PermissionHelper.mayRequestCamera
+import dagger.Lazy
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_scan_barcode.*
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
 
-class ScanBarcodeFragment: BaseFragment(), FScanBarcodeMvpView, LifecycleOwner {
+class ScanBarcodeFragment: BaseFragment<FScanBarcodePresenter>(R.layout.fragment_scan_barcode), FScanBarcodeMvpView, LifecycleOwner {
 
-    @Inject
+    @InjectPresenter
     lateinit var presenter: FScanBarcodePresenter
+    @ProvidePresenter
+    override fun providePresenter(): FScanBarcodePresenter {
+        return super.providePresenter()
+    }
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -43,8 +51,12 @@ class ScanBarcodeFragment: BaseFragment(), FScanBarcodeMvpView, LifecycleOwner {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.init()
         initButtonListeners()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        requestCameraPermission()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -52,7 +64,7 @@ class ScanBarcodeFragment: BaseFragment(), FScanBarcodeMvpView, LifecycleOwner {
 
         val permissionGranted = PermissionHelper.checkGranted(grantResults)
         if (requestCode == REQUEST_CAMERA && permissionGranted)
-            presenter.requestCameraPermission()
+            requestCameraPermission()
         else
             showPermissionDeniedDialog()
     }
@@ -105,6 +117,11 @@ class ScanBarcodeFragment: BaseFragment(), FScanBarcodeMvpView, LifecycleOwner {
         torchCheckBox.setOnCheckedChangeListener { _, isChecked ->
             presenter.torchOn(isChecked)
         }
+    }
+
+    private fun requestCameraPermission() {
+        if (mayRequestCamera(requireActivity() as BaseActivity, this, null))
+            initCamera()
     }
 
     private fun showPermissionDeniedDialog() {

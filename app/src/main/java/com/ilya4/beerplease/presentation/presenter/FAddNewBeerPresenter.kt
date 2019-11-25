@@ -1,17 +1,11 @@
 package com.ilya4.beerplease.presentation.presenter
 
-import com.ilya4.beerplease.presentation.view.activity.base.BaseActivity
 import com.ilya4.beerplease.presentation.view.view.FAddNewBeerMvpView
-import io.reactivex.processors.BehaviorProcessor
+import moxy.MvpPresenter
 
-class FAddNewBeerPresenter(view: FAddNewBeerMvpView,
-                           behaviorProcessor: BehaviorProcessor<Boolean>): BasePresenter<FAddNewBeerMvpView>(view, behaviorProcessor) {
+class FAddNewBeerPresenter: MvpPresenter<FAddNewBeerMvpView>() {
 
-    override fun init(): Boolean {
+    fun init(): Boolean {
         return false
-    }
-
-    override fun bindEvents(activity: BaseActivity) {
-
     }
 }

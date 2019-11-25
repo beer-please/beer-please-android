@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.ilya4.beerplease.R
 import com.ilya4.beerplease.presentation.presenter.FAddNewBeerPresenter
+import com.ilya4.beerplease.presentation.presenter.FScanBarcodePresenter
 import com.ilya4.beerplease.presentation.view.activity.MainActivity
 import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
 import com.ilya4.beerplease.presentation.view.view.FAddNewBeerMvpView
@@ -14,24 +16,22 @@ import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_add_new_beer.*
 import kotlinx.android.synthetic.main.fragment_beer_card.*
 import kotlinx.android.synthetic.main.fragment_beer_card.mainContent
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
 
-class AddNewBeerFragment: BaseFragment(), FAddNewBeerMvpView {
+class AddNewBeerFragment: BaseFragment<FAddNewBeerPresenter>(R.layout.fragment_add_new_beer), FAddNewBeerMvpView {
 
-    @Inject
+    @InjectPresenter
     lateinit var presenter: FAddNewBeerPresenter
+    @ProvidePresenter
+    override fun providePresenter(): FAddNewBeerPresenter {
+        return super.providePresenter()
+    }
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_add_new_beer, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

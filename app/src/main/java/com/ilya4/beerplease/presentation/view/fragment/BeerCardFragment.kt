@@ -4,9 +4,13 @@ import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.core.view.get
+import androidx.fragment.app.Fragment
 import com.github.zawadz88.materialpopupmenu.popupMenu
 import com.ilya4.beerplease.R
+import com.ilya4.beerplease.presentation.presenter.BasePresenter
 import com.ilya4.beerplease.presentation.presenter.FBeerCardPresenter
+import com.ilya4.beerplease.presentation.presenter.FScanBarcodePresenter
+import com.ilya4.beerplease.presentation.presenter.base.BaseMvpPresenter
 import com.ilya4.beerplease.presentation.view.activity.MainActivity
 import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
 import com.ilya4.beerplease.presentation.view.view.FBeerCardMvpView
@@ -14,20 +18,23 @@ import com.ilya4.beerplease.utils.ViewUtils
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.beer_specification_layout.*
 import kotlinx.android.synthetic.main.fragment_beer_card.*
+import moxy.MvpPresenter
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
 
-class BeerCardFragment: BaseFragment(), FBeerCardMvpView {
+class BeerCardFragment: BaseFragment<FBeerCardPresenter>(R.layout.fragment_beer_card), FBeerCardMvpView {
 
-    @Inject
+    @InjectPresenter
     lateinit var presenter: FBeerCardPresenter
+    @ProvidePresenter
+    override fun providePresenter(): FBeerCardPresenter {
+        return super.providePresenter()
+    }
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_beer_card, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -1,4 +1,5 @@
 package com.ilya4.beerplease.presentation.view.view
 
-interface FAddNewBeerMvpView: MvpView {
-}
+import moxy.MvpView
+
+interface FAddNewBeerMvpView: MvpView

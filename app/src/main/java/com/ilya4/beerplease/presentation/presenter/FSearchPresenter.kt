@@ -4,47 +4,34 @@ import android.widget.EditText
 import com.ilya4.beerplease.data.repository.SettingsDataSource
 import com.ilya4.beerplease.domain.usecase.DefaultObserver
 import com.ilya4.beerplease.domain.usecase.search.SearchUseCase
-import com.ilya4.beerplease.presentation.view.activity.base.BaseActivity
 import com.ilya4.beerplease.presentation.view.component.EditTextDebounce
 import com.ilya4.beerplease.presentation.view.view.FSearchMvpView
-import io.reactivex.processors.BehaviorProcessor
+import moxy.InjectViewState
+import moxy.MvpPresenter
 
-class FSearchPresenter(view: FSearchMvpView,
-                       behaviorProcessor: BehaviorProcessor<Boolean>,
-                       private val searchUseCase: SearchUseCase,
+@InjectViewState
+class FSearchPresenter(private val searchUseCase: SearchUseCase,
                        private val settingsDataSource: SettingsDataSource):
-    BasePresenter<FSearchMvpView>(view, behaviorProcessor) {
+    MvpPresenter<FSearchMvpView>() {
 
     private lateinit var searchDebounce: EditTextDebounce
     private lateinit var query: String
-
-    override fun init(): Boolean {
-        return true
-    }
-
-    override fun bindEvents(activity: BaseActivity) {
-    }
-
-    override fun stop() {
-        super.stop()
-        searchUseCase.dispose()
-    }
 
     fun setDebounce(searchEt: EditText) {
         searchDebounce = EditTextDebounce.create(searchEt)
         searchDebounce.watch(
             {
                 if (it.trim().isNotEmpty()) {
-                    view.showSearchClearBtn(true)
-                    view.clearSearchHistory()
+                    viewState.showSearchClearBtn(true)
+                    viewState.clearSearchHistory()
                 } else {
-                    view.showSearchClearBtn(false)
-                    view.showResultNotFound(false)
+                    viewState.showSearchClearBtn(false)
+                    viewState.showResultNotFound(false)
                 }
                 if (it.trim().length > 2) {
                 getSearchResults(it)
             } else {
-                view.clearSearchResults()
+                    viewState.clearSearchResults()
             }
         }, 400)
     }
@@ -68,19 +55,24 @@ class FSearchPresenter(view: FSearchMvpView,
     fun requestShowSearchHistory() {
         val searchHistorySet = settingsDataSource.getSearchHistory()?.toMutableList()
         if (searchHistorySet != null)
-            view.setSearchHistory(searchHistorySet as ArrayList<String>)
+            viewState.setSearchHistory(searchHistorySet as ArrayList<String>)
     }
 
     inner class SearchObserver: DefaultObserver<SearchUseCase.Result>() {
         override fun onNext(result: SearchUseCase.Result) {
             if (result.searchResult != null && result.searchResult.isNotEmpty()) {
               //  view.updateSearchResults(result.searchResult)
-                view.showResultNotFound(false)
+                viewState.showResultNotFound(false)
             } else {
-                view.clearSearchResults()
-                view.showResultNotFound(true)
-                view.setBeerForResultNotFound(query)
+                viewState.clearSearchResults()
+                viewState.showResultNotFound(true)
+                viewState.setBeerForResultNotFound(query)
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        searchUseCase.dispose()
     }
 }

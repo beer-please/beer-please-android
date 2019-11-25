@@ -11,9 +11,6 @@ import io.reactivex.processors.BehaviorProcessor
 class ScanBarcodeModule {
 
     @Provides
-    fun provideFScanBarcodePresenter(view: FScanBarcodeMvpView,
-                                     behaviorProcessor: BehaviorProcessor<Boolean>,
-                                     detector: FirebaseVisionBarcodeDetector): FScanBarcodePresenter {
-        return FScanBarcodePresenter(view, behaviorProcessor, detector)
-    }
+    fun provideFScanBarcodePresenter(detector: FirebaseVisionBarcodeDetector) = FScanBarcodePresenter(detector)
+
 }
