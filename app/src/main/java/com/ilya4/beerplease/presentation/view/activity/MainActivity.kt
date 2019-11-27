@@ -17,7 +17,6 @@ import com.ilya4.beerplease.presentation.view.activity.base.BaseActivity
 import com.ilya4.beerplease.presentation.view.fragment.*
 import com.ilya4.beerplease.presentation.view.view.AMainMvpView
 import dagger.android.AndroidInjection
-import javax.inject.Inject
 
 
 import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
@@ -31,15 +30,21 @@ import com.ilya4.beerplease.utils.StackListManager.Companion.updateStackToIndexF
 import com.ilya4.beerplease.utils.StackListManager.Companion.updateTabStackIndex
 import com.ilya4.beerplease.utils.Utils
 import kotlinx.android.synthetic.main.activity_main.*
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.LinkedHashMap
 
 
-class MainActivity: BaseActivity(), AMainMvpView  {
+class MainActivity: BaseActivity<AMainPresenter>(R.layout.activity_main), AMainMvpView  {
 
-    @Inject
+    @InjectPresenter
     lateinit var presenter: AMainPresenter
+    @ProvidePresenter
+    override fun providePresenter(): AMainPresenter {
+        return super.providePresenter()
+    }
 
     private lateinit var keyboardLayoutListener: ViewTreeObserver.OnGlobalLayoutListener
     private var prevContentHeight = 0
@@ -56,7 +61,6 @@ class MainActivity: BaseActivity(), AMainMvpView  {
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         initButtonListeners()
 
         createStacks()

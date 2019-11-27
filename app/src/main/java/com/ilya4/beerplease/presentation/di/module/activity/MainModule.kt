@@ -10,7 +10,5 @@ import io.reactivex.processors.BehaviorProcessor
 class MainModule {
 
     @Provides
-    fun provideAMainPresenter(view: AMainMvpView,
-                              behaviorProcessor: BehaviorProcessor<Boolean>): AMainPresenter =
-        AMainPresenter(view, behaviorProcessor)
+    fun provideAMainPresenter(): AMainPresenter = AMainPresenter()
 }

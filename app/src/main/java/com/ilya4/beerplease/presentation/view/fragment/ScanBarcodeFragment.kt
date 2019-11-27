@@ -12,6 +12,7 @@ import android.view.Surface
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraX
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
@@ -27,6 +28,7 @@ import com.ilya4.beerplease.utils.PermissionHelper.mayRequestCamera
 import dagger.Lazy
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_scan_barcode.*
+import moxy.MvpPresenter
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
@@ -120,7 +122,7 @@ class ScanBarcodeFragment: BaseFragment<FScanBarcodePresenter>(R.layout.fragment
     }
 
     private fun requestCameraPermission() {
-        if (mayRequestCamera(requireActivity() as BaseActivity, this, null))
+        if (mayRequestCamera(requireActivity() as BaseActivity<out MvpPresenter<*>>, this, null))
             initCamera()
     }
 

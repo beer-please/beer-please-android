@@ -2,10 +2,9 @@ package com.ilya4.beerplease.presentation.view.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ilya4.beerplease.R
 import com.ilya4.beerplease.domain.entity.search.SearchItem
@@ -83,7 +82,7 @@ class SearchFragment: BaseFragment<FSearchPresenter>(R.layout.fragment_search), 
 
     override fun onSearchItemClick(searchItem: SearchItem) {
         val bundle = Bundle()
-        Utils.hideKeyboard(requireActivity() as BaseActivity, searchEt)
+        Utils.hideKeyboard(requireActivity() as AppCompatActivity, searchEt)
         (activity as MainActivity).showBeerCardFragment(getCurrentTab(), true, bundle)
     }
 
@@ -128,7 +127,7 @@ class SearchFragment: BaseFragment<FSearchPresenter>(R.layout.fragment_search), 
         addBeerButton.setOnClickListener {
             val activity = activity as MainActivity
             val bundle = Bundle()
-            Utils.hideKeyboard(requireActivity() as BaseActivity, searchEt)
+            Utils.hideKeyboard(requireActivity() as AppCompatActivity, searchEt)
             activity.showAddNewBeerFragment(getCurrentTab(),true, bundle)
         }
     }
