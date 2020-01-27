@@ -13,10 +13,9 @@ import com.ilya4.beerplease.presentation.app.Constants.EXTRA_IS_ROOT_FRAGMENT
 import com.ilya4.beerplease.presentation.app.Constants.TAB_PROFILE
 import com.ilya4.beerplease.presentation.app.Constants.TAB_SEARCH
 import com.ilya4.beerplease.presentation.presenter.AMainPresenter
-import com.ilya4.beerplease.presentation.view.activity.base.BaseActivity
 import com.ilya4.beerplease.presentation.view.fragment.*
+import com.ilya4.beerplease.presentation.view.fragment.base.BaseFlowFragment
 import com.ilya4.beerplease.presentation.view.view.AMainMvpView
-import dagger.android.AndroidInjection
 
 
 import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
@@ -29,6 +28,7 @@ import com.ilya4.beerplease.utils.StackListManager.Companion.updateStackIndex
 import com.ilya4.beerplease.utils.StackListManager.Companion.updateStackToIndexFirst
 import com.ilya4.beerplease.utils.StackListManager.Companion.updateTabStackIndex
 import com.ilya4.beerplease.utils.Utils
+import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.activity_main.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -37,7 +37,7 @@ import kotlin.collections.ArrayList
 import kotlin.collections.LinkedHashMap
 
 
-class MainActivity: BaseActivity<AMainPresenter>(R.layout.activity_main), AMainMvpView  {
+class MainFlowFragment: BaseFlowFragment<AMainPresenter>(R.layout.activity_main), AMainMvpView  {
 
     @InjectPresenter
     lateinit var presenter: AMainPresenter
@@ -59,8 +59,12 @@ class MainActivity: BaseActivity<AMainPresenter>(R.layout.activity_main), AMainM
     private lateinit var profileFragment: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
+        AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initButtonListeners()
 
         createStacks()
@@ -81,7 +85,7 @@ class MainActivity: BaseActivity<AMainPresenter>(R.layout.activity_main), AMainM
     }
 
     private fun startFindProfileBeerActivity() {
-        startActivity(FindProfileBeerByBarcodeActivity::class.java, false)
+        //startActivity(FindProfileBeerByBarcodeActivity::class.java, false)
     }
 
     fun showBeerCardFragment(tab: String, addToBackStack: Boolean, bundle: Bundle) {
@@ -136,7 +140,7 @@ class MainActivity: BaseActivity<AMainPresenter>(R.layout.activity_main), AMainM
     }
 
     private fun createStacks() {
-        bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+        bottomNavigationView?.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
         val bundle = Bundle()
         searchFragment = SearchFragment().newInstance(bundle, true)
@@ -153,8 +157,8 @@ class MainActivity: BaseActivity<AMainPresenter>(R.layout.activity_main), AMainM
         stackList.add(TAB_SEARCH)
         stackList.add(TAB_PROFILE)
 
-        bottomNavigationView.selectedItemId = R.id.tab_search
-        bottomNavigationView.setOnNavigationItemReselectedListener(onNavigationItemReselectedListener)
+        bottomNavigationView?.selectedItemId = R.id.tab_search
+        bottomNavigationView?.setOnNavigationItemReselectedListener(onNavigationItemReselectedListener)
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
@@ -186,20 +190,20 @@ class MainActivity: BaseActivity<AMainPresenter>(R.layout.activity_main), AMainM
 
             when(tabId) {
                 TAB_SEARCH -> {
-                    addInitialTabFragment(supportFragmentManager, tagStacks, TAB_SEARCH, searchFragment, R.id.container, true)
+                    addInitialTabFragment(childFragmentManager, tagStacks, TAB_SEARCH, searchFragment, R.id.container, true)
                     resolveStackLists(tabId)
                     assignCurrentFragment(searchFragment)
                 }
                 TAB_PROFILE -> {
-                    addAdditionalTabFragment(supportFragmentManager, tagStacks, TAB_PROFILE, profileFragment, currentFragment, R.id.container, true)
+                    addAdditionalTabFragment(childFragmentManager, tagStacks, TAB_PROFILE, profileFragment, currentFragment, R.id.container, true)
                     resolveStackLists(tabId)
                     assignCurrentFragment(profileFragment)
                 }
             }
         } else {
-            val targetFragment = supportFragmentManager.findFragmentByTag(tagStacks[tabId]?.lastElement())
+            val targetFragment = childFragmentManager.findFragmentByTag(tagStacks[tabId]?.lastElement())
             targetFragment?.let {
-                showHideTabFragment(supportFragmentManager, it, currentFragment)
+                showHideTabFragment(childFragmentManager, it, currentFragment)
                 resolveStackLists(tabId)
                 assignCurrentFragment(it)
             }
@@ -211,16 +215,16 @@ class MainActivity: BaseActivity<AMainPresenter>(R.layout.activity_main), AMainM
             return
         }
         while (!tagStacks[currentTab]?.empty()!!
-            && !supportFragmentManager.findFragmentByTag(tagStacks[currentTab]?.peek())?.arguments?.getBoolean(EXTRA_IS_ROOT_FRAGMENT)!!) { //TODO переделать
-            val removeFragment = supportFragmentManager.findFragmentByTag(tagStacks[currentTab]?.peek())
+            && !childFragmentManager.findFragmentByTag(tagStacks[currentTab]?.peek())?.arguments?.getBoolean(EXTRA_IS_ROOT_FRAGMENT)!!) { //TODO переделать
+            val removeFragment = childFragmentManager.findFragmentByTag(tagStacks[currentTab]?.peek())
             removeFragment?.let {
-                supportFragmentManager.beginTransaction().remove(it)
+                childFragmentManager.beginTransaction().remove(it)
             }
             tagStacks[currentTab]?.pop()
         }
-        val fragment = supportFragmentManager.findFragmentByTag(tagStacks[currentTab]?.elementAt(0))
+        val fragment = childFragmentManager.findFragmentByTag(tagStacks[currentTab]?.elementAt(0))
         fragment?.let {
-            removeFragment(supportFragmentManager, it, currentFragment)
+            removeFragment(childFragmentManager, it, currentFragment)
             assignCurrentFragment(it)
         }
     }
@@ -236,8 +240,8 @@ class MainActivity: BaseActivity<AMainPresenter>(R.layout.activity_main), AMainM
             if (stackValue <= 1) {
                 if (menuStacks.size > 1)
                     navigateToPreviousMenu()
-                else
-                    finish()
+               // else
+                   // finish()
             }
         } else {
             popFragment()
@@ -246,10 +250,10 @@ class MainActivity: BaseActivity<AMainPresenter>(R.layout.activity_main), AMainM
 
     private fun popFragment() {
         val fragmentTag = tagStacks[currentTab]?.elementAt(tagStacks[currentTab]?.size!! - 2)
-        val fragment = supportFragmentManager.findFragmentByTag(fragmentTag)
+        val fragment = childFragmentManager.findFragmentByTag(fragmentTag)
         tagStacks[currentTab]?.pop()
 
-        removeFragment(supportFragmentManager, fragment!!, currentFragment)
+        removeFragment(childFragmentManager, fragment!!, currentFragment)
 
         assignCurrentFragment(fragment)
     }
@@ -259,8 +263,8 @@ class MainActivity: BaseActivity<AMainPresenter>(R.layout.activity_main), AMainM
         currentTab = stackList[1]
         BaseFragment.setCurrentTab(currentTab)
         bottomNavigationView.selectedItemId = resolveTabPosition(currentTab)
-        val targetFragment = supportFragmentManager.findFragmentByTag(tagStacks[currentTab]?.lastElement())
-        showHideTabFragment(supportFragmentManager, targetFragment!!, currentFragment)
+        val targetFragment = childFragmentManager.findFragmentByTag(tagStacks[currentTab]?.lastElement())
+        showHideTabFragment(childFragmentManager, targetFragment!!, currentFragment)
         assignCurrentFragment(targetFragment)
         updateStackToIndexFirst(stackList, tempCurrent)
         menuStacks.removeAt(0)
@@ -271,15 +275,15 @@ class MainActivity: BaseActivity<AMainPresenter>(R.layout.activity_main), AMainM
         currentTab = menuStacks[0]
         BaseFragment.setCurrentTab(currentTab)
         bottomNavigationView.selectedItemId = resolveTabPosition(currentTab)
-        val targetFragment = supportFragmentManager.findFragmentByTag(tagStacks[currentTab]?.lastElement())
-        showHideTabFragment(supportFragmentManager, targetFragment!!, currentFragment)
+        val targetFragment = childFragmentManager.findFragmentByTag(tagStacks[currentTab]?.lastElement())
+        showHideTabFragment(childFragmentManager, targetFragment!!, currentFragment)
         assignCurrentFragment(targetFragment)
     }
 
     private fun showFragment(bundle: Bundle, fragmentToAdd: Fragment) {
         val tab = bundle.getString(DATA_KEY_1)
         val shouldAdd = bundle.getBoolean(DATA_KEY_2)
-        addShowHideFragment(supportFragmentManager, tagStacks, tab!!, fragmentToAdd, getCurrentFragmentFromShownStack(), R.id.container, shouldAdd)
+        addShowHideFragment(childFragmentManager, tagStacks, tab!!, fragmentToAdd, getCurrentFragmentFromShownStack(), R.id.container, shouldAdd)
         assignCurrentFragment(fragmentToAdd)
     }
 
@@ -293,7 +297,7 @@ class MainActivity: BaseActivity<AMainPresenter>(R.layout.activity_main), AMainM
     }
 
     private fun getCurrentFragmentFromShownStack(): Fragment {
-        return supportFragmentManager.findFragmentByTag(tagStacks[currentTab]?.elementAt(tagStacks[currentTab]?.size!! - 1))!!
+        return childFragmentManager.findFragmentByTag(tagStacks[currentTab]?.elementAt(tagStacks[currentTab]?.size!! - 1))!!
     }
 
     private fun resolveStackLists(tabId: String) {

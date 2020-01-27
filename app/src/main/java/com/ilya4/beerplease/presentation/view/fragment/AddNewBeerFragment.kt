@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.ilya4.beerplease.R
 import com.ilya4.beerplease.presentation.presenter.FAddNewBeerPresenter
-import com.ilya4.beerplease.presentation.view.activity.MainActivity
+import com.ilya4.beerplease.presentation.view.activity.MainFlowFragment
 import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
 import com.ilya4.beerplease.presentation.view.view.FAddNewBeerMvpView
 import dagger.android.support.AndroidSupportInjection
@@ -47,7 +47,7 @@ class AddNewBeerFragment: BaseFragment<FAddNewBeerPresenter>(R.layout.fragment_a
     }
 
     private fun fixHideBottomBarOnScroll() {
-        val activity = activity as MainActivity
+        val activity = activity as MainFlowFragment
         activity.initOnScrollListener(mainContent)
     }
 
@@ -57,7 +57,7 @@ class AddNewBeerFragment: BaseFragment<FAddNewBeerPresenter>(R.layout.fragment_a
 
     private fun setupOnClickListeners() {
         styleInput.setOnClickListener {
-            val activity = activity as MainActivity
+            val activity = activity as MainFlowFragment
             val bundle = Bundle()
             activity.showChooseBeerStyleFragment(getCurrentTab(), true, bundle)
         }

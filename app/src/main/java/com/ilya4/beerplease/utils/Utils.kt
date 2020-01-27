@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.marginBottom
 import androidx.core.widget.NestedScrollView
 import com.google.android.material.animation.AnimationUtils
-import org.json.JSONArray
 import timber.log.Timber
 import java.nio.charset.Charset
 
@@ -20,8 +19,8 @@ class Utils {
              * @param activity activity
              */
 
-            fun hideKeyboard(activity: AppCompatActivity, view: View) {
-                val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            fun hideKeyboard(context: Context, view: View) {
+                val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(view.windowToken, 0)
             }
 

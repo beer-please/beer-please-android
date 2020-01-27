@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ilya4.beerplease.R
 import com.ilya4.beerplease.domain.entity.search.SearchItem
 import com.ilya4.beerplease.presentation.presenter.FSearchPresenter
-import com.ilya4.beerplease.presentation.view.activity.MainActivity
+import com.ilya4.beerplease.presentation.view.activity.MainFlowFragment
 import com.ilya4.beerplease.presentation.view.adapter.SearchAdapter
 import com.ilya4.beerplease.presentation.view.adapter.SearchHistoryAdapter
 import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
@@ -20,6 +20,7 @@ import com.ilya4.beerplease.utils.Utils
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.item_search_input.*
+import moxy.MvpView
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
@@ -69,7 +70,7 @@ class SearchFragment: BaseFragment<FSearchPresenter>(R.layout.fragment_search), 
     }
 
     override fun hideKeyboard() {
-        Utils.hideKeyboard(activity as MainActivity, searchEt)
+        Utils.hideKeyboard(requireContext(), searchEt)
     }
 
     override fun setSearchHistory(searchHistory: ArrayList<String>) {
@@ -83,7 +84,7 @@ class SearchFragment: BaseFragment<FSearchPresenter>(R.layout.fragment_search), 
     override fun onSearchItemClick(searchItem: SearchItem) {
         val bundle = Bundle()
         Utils.hideKeyboard(requireActivity() as AppCompatActivity, searchEt)
-        (activity as MainActivity).showBeerCardFragment(getCurrentTab(), true, bundle)
+        (activity as MainFlowFragment).showBeerCardFragment(getCurrentTab(), true, bundle)
     }
 
     override fun onSearchHistoryItemClick(query: String) {
@@ -125,7 +126,7 @@ class SearchFragment: BaseFragment<FSearchPresenter>(R.layout.fragment_search), 
                 presenter.requestShowSearchHistory()
         }
         addBeerButton.setOnClickListener {
-            val activity = activity as MainActivity
+            val activity = activity as MainFlowFragment
             val bundle = Bundle()
             Utils.hideKeyboard(requireActivity() as AppCompatActivity, searchEt)
             activity.showAddNewBeerFragment(getCurrentTab(),true, bundle)

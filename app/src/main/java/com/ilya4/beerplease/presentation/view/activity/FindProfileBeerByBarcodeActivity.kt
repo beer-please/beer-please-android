@@ -9,7 +9,6 @@ import com.ilya4.beerplease.presentation.view.view.AFindProfileBeerByBarcodeMvpV
 import dagger.android.AndroidInjection
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
-import javax.inject.Inject
 
 class FindProfileBeerByBarcodeActivity: BaseActivity<AFindProfileBeerByBarcodePresenter>(R.layout.activity_find_profile_beer_by_barcode), AFindProfileBeerByBarcodeMvpView {
 
