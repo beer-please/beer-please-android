@@ -61,7 +61,7 @@ class FSearchPresenter(private val searchUseCase: SearchUseCase,
     inner class SearchObserver: DefaultObserver<SearchUseCase.Result>() {
         override fun onNext(result: SearchUseCase.Result) {
             if (result.searchResult != null && result.searchResult.isNotEmpty()) {
-              //  view.updateSearchResults(result.searchResult)
+                viewState.updateSearchResults(result.searchResult)
                 viewState.showResultNotFound(false)
             } else {
                 viewState.clearSearchResults()

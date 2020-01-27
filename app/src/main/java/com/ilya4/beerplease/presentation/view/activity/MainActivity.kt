@@ -198,9 +198,11 @@ class MainActivity: BaseActivity<AMainPresenter>(R.layout.activity_main), AMainM
             }
         } else {
             val targetFragment = supportFragmentManager.findFragmentByTag(tagStacks[tabId]?.lastElement())
-            showHideTabFragment(supportFragmentManager, targetFragment!!, currentFragment) //TODO переделать
-            resolveStackLists(tabId)
-            assignCurrentFragment(targetFragment)
+            targetFragment?.let {
+                showHideTabFragment(supportFragmentManager, it, currentFragment)
+                resolveStackLists(tabId)
+                assignCurrentFragment(it)
+            }
         }
     }
 
@@ -211,12 +213,16 @@ class MainActivity: BaseActivity<AMainPresenter>(R.layout.activity_main), AMainM
         while (!tagStacks[currentTab]?.empty()!!
             && !supportFragmentManager.findFragmentByTag(tagStacks[currentTab]?.peek())?.arguments?.getBoolean(EXTRA_IS_ROOT_FRAGMENT)!!) { //TODO переделать
             val removeFragment = supportFragmentManager.findFragmentByTag(tagStacks[currentTab]?.peek())
-            supportFragmentManager.beginTransaction().remove(removeFragment!!) //TODO и тут
+            removeFragment?.let {
+                supportFragmentManager.beginTransaction().remove(it)
+            }
             tagStacks[currentTab]?.pop()
         }
         val fragment = supportFragmentManager.findFragmentByTag(tagStacks[currentTab]?.elementAt(0))
-        removeFragment(supportFragmentManager, fragment!!, currentFragment) //TODO и это
-        assignCurrentFragment(fragment)
+        fragment?.let {
+            removeFragment(supportFragmentManager, it, currentFragment)
+            assignCurrentFragment(it)
+        }
     }
 
     private fun resolveBackPressed() {

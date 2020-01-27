@@ -8,4 +8,5 @@ import moxy.viewstate.strategy.StateStrategyType
 interface FChooseBeerStyleMvpView: MvpView {
     fun showSearchClearBtn(show: Boolean)
     fun updateStyleList(styleList: List<String>)
+    fun closeFragment()
 }

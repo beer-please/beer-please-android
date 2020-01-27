@@ -2,23 +2,17 @@ package com.ilya4.beerplease.presentation.view.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.ilya4.beerplease.R
 import com.ilya4.beerplease.presentation.presenter.FAddNewBeerPresenter
-import com.ilya4.beerplease.presentation.presenter.FScanBarcodePresenter
 import com.ilya4.beerplease.presentation.view.activity.MainActivity
 import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
 import com.ilya4.beerplease.presentation.view.view.FAddNewBeerMvpView
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_add_new_beer.*
-import kotlinx.android.synthetic.main.fragment_beer_card.*
 import kotlinx.android.synthetic.main.fragment_beer_card.mainContent
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
-import javax.inject.Inject
 
 class AddNewBeerFragment: BaseFragment<FAddNewBeerPresenter>(R.layout.fragment_add_new_beer), FAddNewBeerMvpView {
 
@@ -34,6 +28,11 @@ class AddNewBeerFragment: BaseFragment<FAddNewBeerPresenter>(R.layout.fragment_a
         super.onAttach(context)
     }
 
+    override fun onStart() {
+        super.onStart()
+        presenter.getCacheData()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupOnClickListeners()
@@ -41,6 +40,10 @@ class AddNewBeerFragment: BaseFragment<FAddNewBeerPresenter>(R.layout.fragment_a
 
         fixHideBottomBarOnScroll()
         initToolbar()
+    }
+
+    override fun setBeerStyle(beerStyle: String) {
+        styleInput.setInputText(beerStyle)
     }
 
     private fun fixHideBottomBarOnScroll() {

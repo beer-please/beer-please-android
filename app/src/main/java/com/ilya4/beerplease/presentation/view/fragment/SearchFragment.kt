@@ -10,7 +10,6 @@ import com.ilya4.beerplease.R
 import com.ilya4.beerplease.domain.entity.search.SearchItem
 import com.ilya4.beerplease.presentation.presenter.FSearchPresenter
 import com.ilya4.beerplease.presentation.view.activity.MainActivity
-import com.ilya4.beerplease.presentation.view.activity.base.BaseActivity
 import com.ilya4.beerplease.presentation.view.adapter.SearchAdapter
 import com.ilya4.beerplease.presentation.view.adapter.SearchHistoryAdapter
 import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
@@ -20,6 +19,7 @@ import com.ilya4.beerplease.presentation.view.view.FSearchMvpView
 import com.ilya4.beerplease.utils.Utils
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.item_search_input.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
@@ -132,7 +132,4 @@ class SearchFragment: BaseFragment<FSearchPresenter>(R.layout.fragment_search), 
         }
     }
 
-    companion object{
-        const val TAG = "SearchFragment"
-    }
 }

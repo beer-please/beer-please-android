@@ -1,8 +1,10 @@
 package com.ilya4.beerplease.presentation.presenter
 
+import android.content.Context
 import android.widget.EditText
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.ilya4.beerplease.data.repository.local.AddBeerTempRepository
 import com.ilya4.beerplease.presentation.view.activity.base.BaseActivity
 import com.ilya4.beerplease.presentation.view.component.EditTextDebounce
 import com.ilya4.beerplease.presentation.view.view.FChooseBeerStyleMvpView
@@ -11,13 +13,13 @@ import io.reactivex.processors.BehaviorProcessor
 import moxy.InjectViewState
 import moxy.MvpPresenter
 @InjectViewState
-class FChooseBeerStylePresenter(val gson: Gson) : MvpPresenter<FChooseBeerStyleMvpView>() {
+class FChooseBeerStylePresenter(val gson: Gson, private val tempRepository: AddBeerTempRepository) : MvpPresenter<FChooseBeerStyleMvpView>() {
 
     private lateinit var searchDebounce: EditTextDebounce
     private lateinit var stylesList: ArrayList<String>
 
-    fun init(): Boolean {
-        setupBeerStylesListFromJson()
+    fun init(context: Context): Boolean {
+        setupBeerStylesListFromJson(context)
         return true
     }
 
@@ -38,11 +40,16 @@ class FChooseBeerStylePresenter(val gson: Gson) : MvpPresenter<FChooseBeerStyleM
         viewState.updateStyleList(stylesList)
     }
 
-    private fun setupBeerStylesListFromJson() {
-//        val json = Utils.loadJsonStringFromAsset(activity, "beer_styles.json")
-//        json.let {
-//            stylesList = gson.fromJson(it, TypeToken.getParameterized(List::class.java, String::class.java).type)
-//            view.updateStyleList(stylesList)
-//        }
+    fun chooseBeerStyle(style: String) {
+        tempRepository.styleBeer = style
+        viewState?.closeFragment()
+    }
+
+    private fun setupBeerStylesListFromJson(context: Context) {
+        val json = Utils.loadJsonStringFromAsset(context, "beer_styles.json")
+        json.let {
+           stylesList = gson.fromJson(it, TypeToken.getParameterized(List::class.java, String::class.java).type)
+            viewState?.updateStyleList(stylesList)
+        }
     }
 }

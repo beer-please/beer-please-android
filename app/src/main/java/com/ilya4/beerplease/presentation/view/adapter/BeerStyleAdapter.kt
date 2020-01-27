@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ilya4.beerplease.R
 import com.ilya4.beerplease.presentation.view.adapter.holder.BeerStyleViewHolder
+import com.ilya4.beerplease.presentation.view.listener.OnBeerStyleClickListener
 
-class BeerStyleAdapter: RecyclerView.Adapter<BeerStyleViewHolder>() {
+class BeerStyleAdapter(private val beerStyleClickListener: OnBeerStyleClickListener): RecyclerView.Adapter<BeerStyleViewHolder>() {
 
     private var stylesBeerList: ArrayList<String> = ArrayList()
 
@@ -14,7 +15,7 @@ class BeerStyleAdapter: RecyclerView.Adapter<BeerStyleViewHolder>() {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.item_style_beer, parent, false)
 
-        return BeerStyleViewHolder(view)
+        return BeerStyleViewHolder(view, beerStyleClickListener)
     }
 
     override fun getItemCount(): Int {

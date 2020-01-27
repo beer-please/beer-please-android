@@ -91,8 +91,4 @@ class BeerCardFragment: BaseFragment<FBeerCardPresenter>(R.layout.fragment_beer_
     private fun showBeerSpecificationDescription(show: Boolean) {
         descriptionBeerSpec.visibility = if (show) View.VISIBLE else View.GONE
     }
-
-    companion object {
-        const val TAG = "BeerCardFragment"
-    }
 }

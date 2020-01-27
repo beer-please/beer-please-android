@@ -50,6 +50,11 @@ class CustomInputLayout: ConstraintLayout {
         initFocusListener()
     }
 
+    fun setInputText(text: String) {
+        textInputEditText.setText(text)
+        requestLayout()
+    }
+
     private fun setTitleHint(hint: String) {
         hint.let {
             topHintText.text = hint
@@ -111,5 +116,10 @@ class CustomInputLayout: ConstraintLayout {
         bottomHintText.visibility = View.VISIBLE
         topHintText.visibility = View.GONE
         imageInput.setImageDrawable(thisNonactiveDrawable)
+    }
+
+    override fun setOnClickListener(l: OnClickListener?) {
+        super.setOnClickListener(l)
+       // textInputEditText.isFocusableInTouchMode = false
     }
 }

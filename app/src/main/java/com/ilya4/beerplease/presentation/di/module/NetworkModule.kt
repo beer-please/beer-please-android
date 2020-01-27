@@ -30,7 +30,7 @@ class NetworkModule {
     fun provideRestApi(gson: Gson, client: OkHttpClient) : RestApi {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .baseUrl("http://192.168.9.111:8080/api/")
+            .baseUrl("http://192.168.1.66:8080/api/")
             .client(client)
             .build()
             .create(RestApi::class.java)

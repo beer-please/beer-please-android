@@ -1,5 +1,6 @@
 package com.ilya4.beerplease.presentation.di.module.fragment
 
+import com.ilya4.beerplease.data.repository.local.AddBeerTempRepository
 import com.ilya4.beerplease.presentation.presenter.FAddNewBeerPresenter
 import dagger.Module
 import dagger.Provides
@@ -8,7 +9,7 @@ import dagger.Provides
 class AddNewBeerModule {
 
     @Provides
-    fun provideFAddNewBeerPresenter(): FAddNewBeerPresenter {
-        return FAddNewBeerPresenter()
+    fun provideFAddNewBeerPresenter(tempRepository: AddBeerTempRepository): FAddNewBeerPresenter {
+        return FAddNewBeerPresenter(tempRepository)
     }
 }

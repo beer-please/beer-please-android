@@ -2,24 +2,22 @@ package com.ilya4.beerplease.presentation.view.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ilya4.beerplease.R
 import com.ilya4.beerplease.presentation.presenter.FChooseBeerStylePresenter
-import com.ilya4.beerplease.presentation.presenter.FScanBarcodePresenter
 import com.ilya4.beerplease.presentation.view.adapter.BeerStyleAdapter
 import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
+import com.ilya4.beerplease.presentation.view.listener.OnBeerStyleClickListener
 import com.ilya4.beerplease.presentation.view.view.FChooseBeerStyleMvpView
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_choose_beer_style.*
+import kotlinx.android.synthetic.main.item_search_input.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
-import javax.inject.Inject
 
-class ChooseBeerStyleFragment: BaseFragment<FChooseBeerStylePresenter>(R.layout.fragment_choose_beer_style), FChooseBeerStyleMvpView {
+class ChooseBeerStyleFragment: BaseFragment<FChooseBeerStylePresenter>(R.layout.fragment_choose_beer_style),
+    FChooseBeerStyleMvpView, OnBeerStyleClickListener {
 
     @InjectPresenter
     lateinit var presenter: FChooseBeerStylePresenter
@@ -28,7 +26,7 @@ class ChooseBeerStyleFragment: BaseFragment<FChooseBeerStylePresenter>(R.layout.
         return super.providePresenter()
     }
 
-    private val adapter: BeerStyleAdapter = BeerStyleAdapter()
+    private val adapter: BeerStyleAdapter = BeerStyleAdapter(this)
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -39,7 +37,7 @@ class ChooseBeerStyleFragment: BaseFragment<FChooseBeerStylePresenter>(R.layout.
         super.onViewCreated(view, savedInstanceState)
         setupBeerStyleAdapter()
         setupOnClickListeners()
-        presenter.init()
+        presenter.init(requireContext())
         presenter.setSearchDebounce(searchEt)
     }
 
@@ -49,6 +47,14 @@ class ChooseBeerStyleFragment: BaseFragment<FChooseBeerStylePresenter>(R.layout.
 
     override fun updateStyleList(styleList: List<String>) {
         adapter.setStyleBeerList(styleList)
+    }
+
+    override fun onChooseBeerStyle(style: String) {
+        presenter.chooseBeerStyle(style)
+    }
+
+    override fun closeFragment() {
+        activity?.onBackPressed()
     }
 
     private fun setupBeerStyleAdapter() {

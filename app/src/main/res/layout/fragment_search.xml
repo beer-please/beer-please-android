@@ -4,59 +4,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/searchLayoutInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_8dp"
-            android:layout_marginStart="@dimen/margin_16dp"
-            android:layout_marginEnd="@dimen/margin_16dp"
-            android:elevation="@dimen/elevation_5dp"
-            android:background="@drawable/custom_search_background"
-            app:layout_constraintTop_toTopOf="parent">
-
-        <EditText
-                android:id="@+id/searchEt"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_48dp"
-                android:paddingStart="@dimen/padding_24dp"
-                android:paddingEnd="@dimen/margin_42dp"
-                android:paddingTop="@dimen/margin_12dp"
-                android:paddingBottom="@dimen/padding_12dp"
-                android:maxLines="1"
-                android:lines="1"
-                android:inputType="text"
-                android:imeOptions="actionSearch"
-                android:maxLength="100"
-                android:background="@drawable/custom_search_background"
-                android:fontFamily="sans-serif"
-                android:textSize="@dimen/text_size_16sp"
-                android:textColor="@color/text_color"
-                android:lineSpacingExtra="@dimen/text_size_8sp"
-                android:hint="@string/search_hint_et"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                tools:text="Cherry"/>
-
-        <ImageView
-                android:id="@+id/searchClearButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin_12dp"
-                android:padding="@dimen/padding_8dp"
-                android:src="@drawable/ic_search_clear"
-                android:visibility="gone"
-                app:layout_constraintTop_toTopOf="@id/searchEt"
-                app:layout_constraintBottom_toBottomOf="@id/searchEt"
-                app:layout_constraintEnd_toEndOf="@id/searchEt" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <include layout="@layout/item_search_input"
+        android:id="@+id/searchLayoutInput"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/searchBeerNotFound"
