@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ilya4.beerplease.R
 import com.ilya4.beerplease.domain.entity.search.SearchItem
 import com.ilya4.beerplease.presentation.presenter.FSearchPresenter
-import com.ilya4.beerplease.presentation.view.activity.MainFlowFragment
+import com.ilya4.beerplease.presentation.view.activity.MainFragment
 import com.ilya4.beerplease.presentation.view.adapter.SearchAdapter
 import com.ilya4.beerplease.presentation.view.adapter.SearchHistoryAdapter
-import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
+import com.ilya4.beerplease.presentation.view.fragment.base.BaseTabFragment
 import com.ilya4.beerplease.presentation.view.listener.OnSearchHistoryItemClickListener
 import com.ilya4.beerplease.presentation.view.listener.OnSearchItemClickListener
 import com.ilya4.beerplease.presentation.view.view.FSearchMvpView
@@ -20,11 +20,10 @@ import com.ilya4.beerplease.utils.Utils
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.item_search_input.*
-import moxy.MvpView
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
-class SearchFragment: BaseFragment<FSearchPresenter>(R.layout.fragment_search), FSearchMvpView, OnSearchHistoryItemClickListener, OnSearchItemClickListener {
+class SearchTabFragment: BaseTabFragment<FSearchPresenter>(R.layout.fragment_search), FSearchMvpView, OnSearchHistoryItemClickListener, OnSearchItemClickListener {
 
     @InjectPresenter
     lateinit var presenter: FSearchPresenter
@@ -84,7 +83,7 @@ class SearchFragment: BaseFragment<FSearchPresenter>(R.layout.fragment_search), 
     override fun onSearchItemClick(searchItem: SearchItem) {
         val bundle = Bundle()
         Utils.hideKeyboard(requireActivity() as AppCompatActivity, searchEt)
-        (activity as MainFlowFragment).showBeerCardFragment(getCurrentTab(), true, bundle)
+        (requireParentFragment() as MainFragment).showBeerCardFragment(currentTab, true, bundle)
     }
 
     override fun onSearchHistoryItemClick(query: String) {
@@ -126,10 +125,10 @@ class SearchFragment: BaseFragment<FSearchPresenter>(R.layout.fragment_search), 
                 presenter.requestShowSearchHistory()
         }
         addBeerButton.setOnClickListener {
-            val activity = activity as MainFlowFragment
+            val activity = activity as MainFragment
             val bundle = Bundle()
             Utils.hideKeyboard(requireActivity() as AppCompatActivity, searchEt)
-            activity.showAddNewBeerFragment(getCurrentTab(),true, bundle)
+            activity.showAddNewBeerFragment(currentTab,true, bundle)
         }
     }
 

@@ -26,7 +26,7 @@ class AppActivity: BaseActivity<AppPresenter>(R.layout.layout_container), AppMvp
 
     private fun initFirstScreen() {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.container, MainFlowFragment())
+            .replace(R.id.container, MainFragment())
             .commit()
     }
 }

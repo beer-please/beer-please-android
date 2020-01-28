@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.view.View
 import com.ilya4.beerplease.R
 import com.ilya4.beerplease.presentation.presenter.FAddNewBeerPresenter
-import com.ilya4.beerplease.presentation.view.activity.MainFlowFragment
-import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
+import com.ilya4.beerplease.presentation.view.activity.MainFragment
+import com.ilya4.beerplease.presentation.view.fragment.base.BaseTabFragment
 import com.ilya4.beerplease.presentation.view.view.FAddNewBeerMvpView
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_add_new_beer.*
@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_beer_card.mainContent
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
-class AddNewBeerFragment: BaseFragment<FAddNewBeerPresenter>(R.layout.fragment_add_new_beer), FAddNewBeerMvpView {
+class AddNewBeerTabFragment: BaseTabFragment<FAddNewBeerPresenter>(R.layout.fragment_add_new_beer), FAddNewBeerMvpView {
 
     @InjectPresenter
     lateinit var presenter: FAddNewBeerPresenter
@@ -47,7 +47,7 @@ class AddNewBeerFragment: BaseFragment<FAddNewBeerPresenter>(R.layout.fragment_a
     }
 
     private fun fixHideBottomBarOnScroll() {
-        val activity = activity as MainFlowFragment
+        val activity = activity as MainFragment
         activity.initOnScrollListener(mainContent)
     }
 
@@ -57,9 +57,9 @@ class AddNewBeerFragment: BaseFragment<FAddNewBeerPresenter>(R.layout.fragment_a
 
     private fun setupOnClickListeners() {
         styleInput.setOnClickListener {
-            val activity = activity as MainFlowFragment
+            val activity = activity as MainFragment
             val bundle = Bundle()
-            activity.showChooseBeerStyleFragment(getCurrentTab(), true, bundle)
+            activity.showChooseBeerStyleFragment(currentTab, true, bundle)
         }
     }
 }

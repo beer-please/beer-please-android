@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.ilya4.beerplease.R
 import com.ilya4.beerplease.presentation.presenter.AFindProfileBeerByBarcodePresenter
 import com.ilya4.beerplease.presentation.view.activity.base.BaseActivity
-import com.ilya4.beerplease.presentation.view.fragment.ScanBarcodeFragment
+import com.ilya4.beerplease.presentation.view.fragment.ScanBarcodeTabFragment
 import com.ilya4.beerplease.presentation.view.view.AFindProfileBeerByBarcodeMvpView
 import dagger.android.AndroidInjection
 import moxy.presenter.InjectPresenter
@@ -23,8 +23,8 @@ class FindProfileBeerByBarcodeActivity: BaseActivity<AFindProfileBeerByBarcodePr
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_find_profile_beer_by_barcode)
-        val fragment = ScanBarcodeFragment().newInstance(Bundle(), true)
-        showFragment(ScanBarcodeFragment.TAG, fragment, false)
+        val fragment = ScanBarcodeTabFragment().newInstance(Bundle(), true)
+        showFragment(ScanBarcodeTabFragment.TAG, fragment, false)
     }
 
     //TODO убрать эту активити и перевести все в SingleActivity

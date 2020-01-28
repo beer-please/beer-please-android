@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ilya4.beerplease.R
 import com.ilya4.beerplease.presentation.presenter.FChooseBeerStylePresenter
 import com.ilya4.beerplease.presentation.view.adapter.BeerStyleAdapter
-import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
+import com.ilya4.beerplease.presentation.view.fragment.base.BaseTabFragment
 import com.ilya4.beerplease.presentation.view.listener.OnBeerStyleClickListener
 import com.ilya4.beerplease.presentation.view.view.FChooseBeerStyleMvpView
 import dagger.android.support.AndroidSupportInjection
@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.item_search_input.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
-class ChooseBeerStyleFragment: BaseFragment<FChooseBeerStylePresenter>(R.layout.fragment_choose_beer_style),
+class ChooseBeerStyleTabFragment: BaseTabFragment<FChooseBeerStylePresenter>(R.layout.fragment_choose_beer_style),
     FChooseBeerStyleMvpView, OnBeerStyleClickListener {
 
     @InjectPresenter

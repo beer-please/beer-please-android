@@ -7,7 +7,7 @@ import javax.inject.Inject
 import dagger.Lazy
 
 
-abstract class BaseFlowFragment<Presenter : MvpPresenter<out MvpView>>(contentLayoutId: Int) :
+abstract class BaseFragment<Presenter : MvpPresenter<out MvpView>>(contentLayoutId: Int) :
     MvpAppCompatFragment(contentLayoutId) {
 
     @Inject

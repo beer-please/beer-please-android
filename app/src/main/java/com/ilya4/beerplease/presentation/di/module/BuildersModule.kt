@@ -6,7 +6,7 @@ import com.ilya4.beerplease.presentation.di.module.activity.MainModule
 import com.ilya4.beerplease.presentation.di.module.fragment.*
 import com.ilya4.beerplease.presentation.view.activity.AppActivity
 import com.ilya4.beerplease.presentation.view.activity.FindProfileBeerByBarcodeActivity
-import com.ilya4.beerplease.presentation.view.activity.MainFlowFragment
+import com.ilya4.beerplease.presentation.view.activity.MainFragment
 import com.ilya4.beerplease.presentation.view.fragment.*
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -21,20 +21,20 @@ abstract class BuildersModule {
 
     //fragment
     @ContributesAndroidInjector(modules = [MainModule::class])
-    abstract fun bindMainFlowFragment(): MainFlowFragment
+    abstract fun bindMainFlowFragment(): MainFragment
     @ContributesAndroidInjector(modules = [SearchModule::class])
-    abstract fun bindSearchFragment(): SearchFragment
+    abstract fun bindSearchFragment(): SearchTabFragment
     @ContributesAndroidInjector(modules = [UserProfileModule::class])
-    abstract fun bindUserProfileFragment(): UserProfileFragment
+    abstract fun bindUserProfileFragment(): UserProfileTabFragment
     @ContributesAndroidInjector(modules = [ScanBarcodeModule::class])
-    abstract fun bindScanBarcodeFragment() : ScanBarcodeFragment
+    abstract fun bindScanBarcodeFragment() : ScanBarcodeTabFragment
     @ContributesAndroidInjector(modules = [ChooseBeerStyleModule::class])
-    abstract fun bindChooseBeerStyleFragment(): ChooseBeerStyleFragment
+    abstract fun bindChooseBeerStyleFragment(): ChooseBeerStyleTabFragment
     @ContributesAndroidInjector(modules = [ChooseBreweryModule::class])
-    abstract fun bindChooseBreweryFragment(): ChooseBreweryFragment
+    abstract fun bindChooseBreweryFragment(): ChooseBreweryTabFragment
     @ContributesAndroidInjector(modules = [BeerCardModule::class])
-    abstract fun bindBeerCardFragment(): BeerCardFragment
+    abstract fun bindBeerCardFragment(): BeerCardTabFragment
     @ContributesAndroidInjector(modules = [AddNewBeerModule::class])
-    abstract fun bindAddNewBeerFragment(): AddNewBeerFragment
+    abstract fun bindAddNewBeerFragment(): AddNewBeerTabFragment
 
 }

@@ -12,7 +12,6 @@ import android.view.Surface
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraX
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
@@ -21,19 +20,17 @@ import com.ilya4.beerplease.R
 import com.ilya4.beerplease.presentation.app.Constants.REQUEST_CAMERA
 import com.ilya4.beerplease.presentation.presenter.FScanBarcodePresenter
 import com.ilya4.beerplease.presentation.view.activity.base.BaseActivity
-import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
+import com.ilya4.beerplease.presentation.view.fragment.base.BaseTabFragment
 import com.ilya4.beerplease.presentation.view.view.FScanBarcodeMvpView
 import com.ilya4.beerplease.utils.PermissionHelper
 import com.ilya4.beerplease.utils.PermissionHelper.mayRequestCamera
-import dagger.Lazy
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_scan_barcode.*
 import moxy.MvpPresenter
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
-import javax.inject.Inject
 
-class ScanBarcodeFragment: BaseFragment<FScanBarcodePresenter>(R.layout.fragment_scan_barcode), FScanBarcodeMvpView, LifecycleOwner {
+class ScanBarcodeTabFragment: BaseTabFragment<FScanBarcodePresenter>(R.layout.fragment_scan_barcode), FScanBarcodeMvpView, LifecycleOwner {
 
     @InjectPresenter
     lateinit var presenter: FScanBarcodePresenter
@@ -142,6 +139,6 @@ class ScanBarcodeFragment: BaseFragment<FScanBarcodePresenter>(R.layout.fragment
     }
 
     companion object{
-        const val TAG = "ScanBarcodeFragment"
+        const val TAG = "ScanBarcodeTabFragment"
     }
 }

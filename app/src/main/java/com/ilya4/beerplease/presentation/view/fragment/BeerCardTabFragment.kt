@@ -7,8 +7,8 @@ import androidx.core.view.get
 import com.github.zawadz88.materialpopupmenu.popupMenu
 import com.ilya4.beerplease.R
 import com.ilya4.beerplease.presentation.presenter.FBeerCardPresenter
-import com.ilya4.beerplease.presentation.view.activity.MainFlowFragment
-import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
+import com.ilya4.beerplease.presentation.view.activity.MainFragment
+import com.ilya4.beerplease.presentation.view.fragment.base.BaseTabFragment
 import com.ilya4.beerplease.presentation.view.view.FBeerCardMvpView
 import com.ilya4.beerplease.utils.ViewUtils
 import dagger.android.support.AndroidSupportInjection
@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_beer_card.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
-class BeerCardFragment: BaseFragment<FBeerCardPresenter>(R.layout.fragment_beer_card), FBeerCardMvpView {
+class BeerCardTabFragment: BaseTabFragment<FBeerCardPresenter>(R.layout.fragment_beer_card), FBeerCardMvpView {
 
     @InjectPresenter
     lateinit var presenter: FBeerCardPresenter
@@ -41,8 +41,8 @@ class BeerCardFragment: BaseFragment<FBeerCardPresenter>(R.layout.fragment_beer_
     }
 
     private fun fixHideBottomBarOnScroll() {
-        val activity = activity as MainFlowFragment
-        activity.initOnScrollListener(mainContent)
+        val mainFragment = (requireParentFragment() as MainFragment)
+        mainFragment.initOnScrollListener(mainContent)
     }
 
     private fun initToolbar() {

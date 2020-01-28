@@ -14,11 +14,11 @@ import com.ilya4.beerplease.presentation.app.Constants.TAB_PROFILE
 import com.ilya4.beerplease.presentation.app.Constants.TAB_SEARCH
 import com.ilya4.beerplease.presentation.presenter.AMainPresenter
 import com.ilya4.beerplease.presentation.view.fragment.*
-import com.ilya4.beerplease.presentation.view.fragment.base.BaseFlowFragment
+import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
 import com.ilya4.beerplease.presentation.view.view.AMainMvpView
 
 
-import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
+import com.ilya4.beerplease.presentation.view.fragment.base.BaseTabFragment
 import com.ilya4.beerplease.utils.FragmentUtils.Companion.addAdditionalTabFragment
 import com.ilya4.beerplease.utils.FragmentUtils.Companion.addInitialTabFragment
 import com.ilya4.beerplease.utils.FragmentUtils.Companion.addShowHideFragment
@@ -37,7 +37,7 @@ import kotlin.collections.ArrayList
 import kotlin.collections.LinkedHashMap
 
 
-class MainFlowFragment: BaseFlowFragment<AMainPresenter>(R.layout.activity_main), AMainMvpView  {
+class MainFragment: BaseFragment<AMainPresenter>(R.layout.activity_main), AMainMvpView  {
 
     @InjectPresenter
     lateinit var presenter: AMainPresenter
@@ -51,7 +51,7 @@ class MainFlowFragment: BaseFlowFragment<AMainPresenter>(R.layout.activity_main)
     private var isKeyboardShown = false
 
     private lateinit var tagStacks: MutableMap<String, Stack<String>>
-    private lateinit var currentTab: String
+    private lateinit var currentStack: String
     private lateinit var stackList: MutableList<String>
     private lateinit var menuStacks: MutableList<String>
     private lateinit var currentFragment: Fragment
@@ -92,21 +92,21 @@ class MainFlowFragment: BaseFlowFragment<AMainPresenter>(R.layout.activity_main)
         val commonBundle = Bundle()
         commonBundle.putString(DATA_KEY_1, tab)
         commonBundle.putBoolean(DATA_KEY_2, addToBackStack)
-        showFragment(commonBundle, BeerCardFragment().newInstance(bundle, false))
+        showFragment(commonBundle, BeerCardTabFragment().newInstance(bundle, false))
     }
 
     fun showAddNewBeerFragment(tab: String, addToBackStack: Boolean, bundle: Bundle) {
         val commonBundle = Bundle()
         commonBundle.putString(DATA_KEY_1, tab)
         commonBundle.putBoolean(DATA_KEY_2, addToBackStack)
-        showFragment(commonBundle, AddNewBeerFragment().newInstance(bundle, false))
+        showFragment(commonBundle, AddNewBeerTabFragment().newInstance(bundle, false))
     }
 
     fun showChooseBeerStyleFragment(tab: String, addToBackStack: Boolean, bundle: Bundle) {
         val commonBundle = Bundle()
         commonBundle.putString(DATA_KEY_1, tab)
         commonBundle.putBoolean(DATA_KEY_2, addToBackStack)
-        showFragment(commonBundle, ChooseBeerStyleFragment().newInstance(bundle, false))
+        showFragment(commonBundle, ChooseBeerStyleTabFragment().newInstance(bundle, false))
     }
 
     fun initOnScrollListener(nestedScrollView: NestedScrollView) {
@@ -143,8 +143,8 @@ class MainFlowFragment: BaseFlowFragment<AMainPresenter>(R.layout.activity_main)
         bottomNavigationView?.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
         val bundle = Bundle()
-        searchFragment = SearchFragment().newInstance(bundle, true)
-        profileFragment = UserProfileFragment().newInstance(bundle, true)
+        searchFragment = SearchTabFragment().newInstance(bundle, true)
+        profileFragment = UserProfileTabFragment().newInstance(bundle, true)
 
         tagStacks = LinkedHashMap()
         tagStacks[TAB_SEARCH] = Stack()
@@ -183,8 +183,8 @@ class MainFlowFragment: BaseFlowFragment<AMainPresenter>(R.layout.activity_main)
     }
 
     private fun selectedTab(tabId: String) {
-        currentTab = tabId
-        BaseFragment.setCurrentTab(currentTab)
+        currentStack = tabId
+        BaseTabFragment.currentTab = currentStack
 
         if (tagStacks[tabId]?.size == 0) {
 
@@ -211,18 +211,18 @@ class MainFlowFragment: BaseFlowFragment<AMainPresenter>(R.layout.activity_main)
     }
 
     private fun popStackExceptFirst() {
-        if (tagStacks[currentTab]?.size == 1) {
+        if (tagStacks[currentStack]?.size == 1) {
             return
         }
-        while (!tagStacks[currentTab]?.empty()!!
-            && !childFragmentManager.findFragmentByTag(tagStacks[currentTab]?.peek())?.arguments?.getBoolean(EXTRA_IS_ROOT_FRAGMENT)!!) { //TODO переделать
-            val removeFragment = childFragmentManager.findFragmentByTag(tagStacks[currentTab]?.peek())
+        while (!tagStacks[currentStack]?.empty()!!
+            && !childFragmentManager.findFragmentByTag(tagStacks[currentStack]?.peek())?.arguments?.getBoolean(EXTRA_IS_ROOT_FRAGMENT)!!) { //TODO переделать
+            val removeFragment = childFragmentManager.findFragmentByTag(tagStacks[currentStack]?.peek())
             removeFragment?.let {
                 childFragmentManager.beginTransaction().remove(it)
             }
-            tagStacks[currentTab]?.pop()
+            tagStacks[currentStack]?.pop()
         }
-        val fragment = childFragmentManager.findFragmentByTag(tagStacks[currentTab]?.elementAt(0))
+        val fragment = childFragmentManager.findFragmentByTag(tagStacks[currentStack]?.elementAt(0))
         fragment?.let {
             removeFragment(childFragmentManager, it, currentFragment)
             assignCurrentFragment(it)
@@ -231,7 +231,7 @@ class MainFlowFragment: BaseFlowFragment<AMainPresenter>(R.layout.activity_main)
 
     private fun resolveBackPressed() {
         var stackValue = 0
-        if (tagStacks[currentTab]?.size == 1) {
+        if (tagStacks[currentStack]?.size == 1) {
             val value = tagStacks[stackList[1]]
             if (value?.size!! > 1) {
                 stackValue = value.size
@@ -249,9 +249,9 @@ class MainFlowFragment: BaseFlowFragment<AMainPresenter>(R.layout.activity_main)
     }
 
     private fun popFragment() {
-        val fragmentTag = tagStacks[currentTab]?.elementAt(tagStacks[currentTab]?.size!! - 2)
+        val fragmentTag = tagStacks[currentStack]?.elementAt(tagStacks[currentStack]?.size!! - 2)
         val fragment = childFragmentManager.findFragmentByTag(fragmentTag)
-        tagStacks[currentTab]?.pop()
+        tagStacks[currentStack]?.pop()
 
         removeFragment(childFragmentManager, fragment!!, currentFragment)
 
@@ -260,10 +260,10 @@ class MainFlowFragment: BaseFlowFragment<AMainPresenter>(R.layout.activity_main)
 
     private fun popAndNavigateToPreviousMenu() {
         val tempCurrent = stackList[0]
-        currentTab = stackList[1]
-        BaseFragment.setCurrentTab(currentTab)
-        bottomNavigationView.selectedItemId = resolveTabPosition(currentTab)
-        val targetFragment = childFragmentManager.findFragmentByTag(tagStacks[currentTab]?.lastElement())
+        currentStack = stackList[1]
+        BaseTabFragment.currentTab = currentStack
+        bottomNavigationView.selectedItemId = resolveTabPosition(currentStack)
+        val targetFragment = childFragmentManager.findFragmentByTag(tagStacks[currentStack]?.lastElement())
         showHideTabFragment(childFragmentManager, targetFragment!!, currentFragment)
         assignCurrentFragment(targetFragment)
         updateStackToIndexFirst(stackList, tempCurrent)
@@ -272,10 +272,10 @@ class MainFlowFragment: BaseFlowFragment<AMainPresenter>(R.layout.activity_main)
 
     private fun navigateToPreviousMenu() {
         menuStacks.removeAt(0)
-        currentTab = menuStacks[0]
-        BaseFragment.setCurrentTab(currentTab)
-        bottomNavigationView.selectedItemId = resolveTabPosition(currentTab)
-        val targetFragment = childFragmentManager.findFragmentByTag(tagStacks[currentTab]?.lastElement())
+        currentStack = menuStacks[0]
+        BaseTabFragment.currentTab = currentStack
+        bottomNavigationView.selectedItemId = resolveTabPosition(currentStack)
+        val targetFragment = childFragmentManager.findFragmentByTag(tagStacks[currentStack]?.lastElement())
         showHideTabFragment(childFragmentManager, targetFragment!!, currentFragment)
         assignCurrentFragment(targetFragment)
     }
@@ -297,7 +297,7 @@ class MainFlowFragment: BaseFlowFragment<AMainPresenter>(R.layout.activity_main)
     }
 
     private fun getCurrentFragmentFromShownStack(): Fragment {
-        return childFragmentManager.findFragmentByTag(tagStacks[currentTab]?.elementAt(tagStacks[currentTab]?.size!! - 1))!!
+        return childFragmentManager.findFragmentByTag(tagStacks[currentStack]?.elementAt(tagStacks[currentStack]?.size!! - 1))!!
     }
 
     private fun resolveStackLists(tabId: String) {

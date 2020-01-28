@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 public class BaseDialogFragment extends DialogFragment {
-    private static final String TAG = "BaseFragment";
+    private static final String TAG = "BaseTabFragment";
 
     public static final String FRAGMENT_ID = "FRAGMENT_ID";
 
