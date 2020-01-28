@@ -5,7 +5,7 @@ import com.ilya4.beerplease.presentation.di.module.activity.FindProfileBeerByBar
 import com.ilya4.beerplease.presentation.di.module.activity.MainModule
 import com.ilya4.beerplease.presentation.di.module.fragment.*
 import com.ilya4.beerplease.presentation.view.activity.AppActivity
-import com.ilya4.beerplease.presentation.view.activity.FindProfileBeerByBarcodeActivity
+import com.ilya4.beerplease.presentation.view.activity.FindProfileBeerByBarcodeFragment
 import com.ilya4.beerplease.presentation.view.activity.MainFragment
 import com.ilya4.beerplease.presentation.view.fragment.*
 import dagger.Module
@@ -17,7 +17,7 @@ abstract class BuildersModule {
     @ContributesAndroidInjector(modules = [AppActivityModule::class])
     abstract fun bindAppActivity(): AppActivity
     @ContributesAndroidInjector(modules = [FindProfileBeerByBarcodeModule::class])
-    abstract fun bindFindProfileBeerByBarcodeActivity(): FindProfileBeerByBarcodeActivity
+    abstract fun bindFindProfileBeerByBarcodeActivity(): FindProfileBeerByBarcodeFragment
 
     //fragment
     @ContributesAndroidInjector(modules = [MainModule::class])

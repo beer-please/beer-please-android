@@ -29,4 +29,10 @@ class AppActivity: BaseActivity<AppPresenter>(R.layout.layout_container), AppMvp
             .replace(R.id.container, MainFragment())
             .commit()
     }
+
+    fun showFindProfileBeerByBarcodeFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, FindProfileBeerByBarcodeFragment())
+            .commit()
+    }
 }

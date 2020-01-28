@@ -76,16 +76,21 @@ class MainFragment: BaseFragment<AMainPresenter>(R.layout.activity_main), AMainM
         rootView.viewTreeObserver.addOnGlobalLayoutListener(keyboardLayoutListener)
     }
 
+    override fun onStop() {
+        super.onStop()
+        rootView.viewTreeObserver.removeOnGlobalLayoutListener(keyboardLayoutListener)
+    }
+
     private fun initButtonListeners() {
-        scanFab.setOnClickListener { startFindProfileBeerActivity() }
+        scanFab.setOnClickListener { startFindProfileBeerFragment() }
     }
 
     override fun onBackPressed() {
         resolveBackPressed()
     }
 
-    private fun startFindProfileBeerActivity() {
-        //startActivity(FindProfileBeerByBarcodeActivity::class.java, false)
+    private fun startFindProfileBeerFragment() {
+        (requireActivity() as AppActivity).showFindProfileBeerByBarcodeFragment()
     }
 
     fun showBeerCardFragment(tab: String, addToBackStack: Boolean, bundle: Bundle) {
