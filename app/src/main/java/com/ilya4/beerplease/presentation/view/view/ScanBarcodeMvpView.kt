@@ -7,7 +7,7 @@ import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
-interface FScanBarcodeMvpView: MvpView {
+interface ScanBarcodeMvpView: MvpView {
     fun initCamera()
     fun startCamera(preview: Preview, imageAnalysis: ImageAnalysis)
     fun showBarcodeToast(barcode: String)

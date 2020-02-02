@@ -6,10 +6,10 @@ import android.view.*
 import androidx.core.view.get
 import com.github.zawadz88.materialpopupmenu.popupMenu
 import com.ilya4.beerplease.R
-import com.ilya4.beerplease.presentation.presenter.FBeerCardPresenter
-import com.ilya4.beerplease.presentation.view.activity.MainFragment
-import com.ilya4.beerplease.presentation.view.fragment.base.BaseTabFragment
-import com.ilya4.beerplease.presentation.view.view.FBeerCardMvpView
+import com.ilya4.beerplease.presentation.presenter.BeerCardPresenter
+import com.ilya4.beerplease.presentation.view.fragment.flows.MainFlowFragment
+import com.ilya4.beerplease.presentation.base.BaseTabFragment
+import com.ilya4.beerplease.presentation.view.view.BeerCardMvpView
 import com.ilya4.beerplease.utils.ViewUtils
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.beer_specification_layout.*
@@ -17,12 +17,12 @@ import kotlinx.android.synthetic.main.fragment_beer_card.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
-class BeerCardTabFragment: BaseTabFragment<FBeerCardPresenter>(R.layout.fragment_beer_card), FBeerCardMvpView {
+class BeerCardTabFragment: BaseTabFragment<BeerCardPresenter>(R.layout.fragment_beer_card), BeerCardMvpView {
 
     @InjectPresenter
-    lateinit var presenter: FBeerCardPresenter
+    lateinit var presenter: BeerCardPresenter
     @ProvidePresenter
-    override fun providePresenter(): FBeerCardPresenter {
+    override fun providePresenter(): BeerCardPresenter {
         return super.providePresenter()
     }
 
@@ -41,7 +41,7 @@ class BeerCardTabFragment: BaseTabFragment<FBeerCardPresenter>(R.layout.fragment
     }
 
     private fun fixHideBottomBarOnScroll() {
-        val mainFragment = (requireParentFragment() as MainFragment)
+        val mainFragment = (requireParentFragment() as MainFlowFragment)
         mainFragment.initOnScrollListener(mainContent)
     }
 

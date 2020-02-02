@@ -5,15 +5,13 @@ import android.widget.EditText
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.ilya4.beerplease.data.repository.local.AddBeerTempRepository
-import com.ilya4.beerplease.presentation.view.activity.base.BaseActivity
 import com.ilya4.beerplease.presentation.view.component.EditTextDebounce
-import com.ilya4.beerplease.presentation.view.view.FChooseBeerStyleMvpView
+import com.ilya4.beerplease.presentation.view.view.ChooseBeerStyleMvpView
 import com.ilya4.beerplease.utils.Utils
-import io.reactivex.processors.BehaviorProcessor
 import moxy.InjectViewState
 import moxy.MvpPresenter
 @InjectViewState
-class FChooseBeerStylePresenter(val gson: Gson, private val tempRepository: AddBeerTempRepository) : MvpPresenter<FChooseBeerStyleMvpView>() {
+class ChooseBeerStylePresenter(val gson: Gson, private val tempRepository: AddBeerTempRepository) : MvpPresenter<ChooseBeerStyleMvpView>() {
 
     private lateinit var searchDebounce: EditTextDebounce
     private lateinit var stylesList: ArrayList<String>

@@ -2,19 +2,19 @@ package com.ilya4.beerplease.presentation.view.fragment
 
 import android.content.Context
 import com.ilya4.beerplease.R
-import com.ilya4.beerplease.presentation.presenter.FUserProfilePresenter
-import com.ilya4.beerplease.presentation.view.fragment.base.BaseTabFragment
-import com.ilya4.beerplease.presentation.view.view.FUserProfileMvpView
+import com.ilya4.beerplease.presentation.presenter.UserProfilePresenter
+import com.ilya4.beerplease.presentation.base.BaseTabFragment
+import com.ilya4.beerplease.presentation.view.view.UserProfileMvpView
 import dagger.android.support.AndroidSupportInjection
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
-class UserProfileTabFragment: BaseTabFragment<FUserProfilePresenter>(R.layout.fragment_user_profile), FUserProfileMvpView {
+class UserProfileTabFragment: BaseTabFragment<UserProfilePresenter>(R.layout.fragment_user_profile), UserProfileMvpView {
 
     @InjectPresenter
-    lateinit var presenter: FUserProfilePresenter
+    lateinit var presenter: UserProfilePresenter
     @ProvidePresenter
-    override fun providePresenter(): FUserProfilePresenter {
+    override fun providePresenter(): UserProfilePresenter {
         return super.providePresenter()
     }
 

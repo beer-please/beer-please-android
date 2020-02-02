@@ -1,4 +1,4 @@
-package com.ilya4.beerplease.presentation.view.activity
+package com.ilya4.beerplease.presentation.view.fragment.flows
 
 import android.os.Bundle
 import android.view.View
@@ -12,13 +12,11 @@ import com.ilya4.beerplease.presentation.app.Constants.DATA_KEY_2
 import com.ilya4.beerplease.presentation.app.Constants.EXTRA_IS_ROOT_FRAGMENT
 import com.ilya4.beerplease.presentation.app.Constants.TAB_PROFILE
 import com.ilya4.beerplease.presentation.app.Constants.TAB_SEARCH
-import com.ilya4.beerplease.presentation.presenter.AMainPresenter
+import com.ilya4.beerplease.presentation.presenter.FlowMainPresenter
 import com.ilya4.beerplease.presentation.view.fragment.*
-import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment
-import com.ilya4.beerplease.presentation.view.view.AMainMvpView
-
-
-import com.ilya4.beerplease.presentation.view.fragment.base.BaseTabFragment
+import com.ilya4.beerplease.presentation.base.BaseFragment
+import com.ilya4.beerplease.presentation.view.view.MainMvpView
+import com.ilya4.beerplease.presentation.base.BaseTabFragment
 import com.ilya4.beerplease.utils.FragmentUtils.Companion.addAdditionalTabFragment
 import com.ilya4.beerplease.utils.FragmentUtils.Companion.addInitialTabFragment
 import com.ilya4.beerplease.utils.FragmentUtils.Companion.addShowHideFragment
@@ -37,12 +35,12 @@ import kotlin.collections.ArrayList
 import kotlin.collections.LinkedHashMap
 
 
-class MainFragment: BaseFragment<AMainPresenter>(R.layout.activity_main), AMainMvpView  {
+class MainFlowFragment: BaseFragment<FlowMainPresenter>(R.layout.activity_main), MainMvpView  {
 
     @InjectPresenter
-    lateinit var presenter: AMainPresenter
+    lateinit var presenter: FlowMainPresenter
     @ProvidePresenter
-    override fun providePresenter(): AMainPresenter {
+    override fun providePresenter(): FlowMainPresenter {
         return super.providePresenter()
     }
 
@@ -82,15 +80,11 @@ class MainFragment: BaseFragment<AMainPresenter>(R.layout.activity_main), AMainM
     }
 
     private fun initButtonListeners() {
-        scanFab.setOnClickListener { startFindProfileBeerFragment() }
+        scanFab.setOnClickListener { presenter.goToFindBeerByBarcode() }
     }
 
     override fun onBackPressed() {
         resolveBackPressed()
-    }
-
-    private fun startFindProfileBeerFragment() {
-        (requireActivity() as AppActivity).showFindProfileBeerByBarcodeFragment()
     }
 
     fun showBeerCardFragment(tab: String, addToBackStack: Boolean, bundle: Bundle) {
@@ -245,8 +239,8 @@ class MainFragment: BaseFragment<AMainPresenter>(R.layout.activity_main), AMainM
             if (stackValue <= 1) {
                 if (menuStacks.size > 1)
                     navigateToPreviousMenu()
-               // else
-                   // finish()
+               else
+                   activity?.finish()
             }
         } else {
             popFragment()

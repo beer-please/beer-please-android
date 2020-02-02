@@ -17,7 +17,8 @@ import javax.inject.Singleton
     BuildersModule::class,
     ManagersModule::class,
     ProviderDataModule::class,
-    StorageModule::class]
+    StorageModule::class,
+    NavigationModule::class]
 )
 interface AppComponent {
     fun inject(app: BeerPleaseApp)
@@ -39,6 +40,9 @@ interface AppComponent {
 
         @BindsInstance
         fun moduleStorage(module: StorageModule) : Builder
+
+        @BindsInstance
+        fun moduleNavigation(module: NavigationModule) : Builder
 
         fun build() : AppComponent
     }

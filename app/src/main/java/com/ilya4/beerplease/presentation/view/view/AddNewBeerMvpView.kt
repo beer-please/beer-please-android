@@ -5,4 +5,6 @@ import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
-interface AFindProfileBeerByBarcodeMvpView: MvpView
+interface AddNewBeerMvpView: MvpView {
+    fun setBeerStyle(beerStyle: String)
+}

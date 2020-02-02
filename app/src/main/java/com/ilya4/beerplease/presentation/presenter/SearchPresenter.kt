@@ -5,14 +5,14 @@ import com.ilya4.beerplease.data.repository.SettingsDataSource
 import com.ilya4.beerplease.domain.usecase.DefaultObserver
 import com.ilya4.beerplease.domain.usecase.search.SearchUseCase
 import com.ilya4.beerplease.presentation.view.component.EditTextDebounce
-import com.ilya4.beerplease.presentation.view.view.FSearchMvpView
+import com.ilya4.beerplease.presentation.view.view.SearchMvpView
 import moxy.InjectViewState
 import moxy.MvpPresenter
 
 @InjectViewState
-class FSearchPresenter(private val searchUseCase: SearchUseCase,
-                       private val settingsDataSource: SettingsDataSource):
-    MvpPresenter<FSearchMvpView>() {
+class SearchPresenter(private val searchUseCase: SearchUseCase,
+                      private val settingsDataSource: SettingsDataSource):
+    MvpPresenter<SearchMvpView>() {
 
     private lateinit var searchDebounce: EditTextDebounce
     private lateinit var query: String

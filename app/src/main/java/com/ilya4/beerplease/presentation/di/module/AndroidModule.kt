@@ -48,20 +48,4 @@ class AndroidModule {
     @Provides
     @Singleton
     fun providePostExecutionThread(uiThread: UIThread) : PostExecutionThread = uiThread
-
-    @Provides
-    @Singleton
-    @Named("DeviceUUID")
-    fun provideDeviceUUD(context: Context) : String {
-        var uniqueID : String?
-        val sharedPreferences = context.getSharedPreferences("UUID_DEVICE", Context.MODE_PRIVATE)
-        uniqueID = sharedPreferences.getString("UUID_DEVICE", null)
-        if (uniqueID == null) {
-            uniqueID = UUID.randomUUID().toString()
-            val editor = sharedPreferences.edit()
-            editor.putString("UUID_DEVICE", uniqueID)
-            editor.apply()
-        }
-        return uniqueID
-    }
 }

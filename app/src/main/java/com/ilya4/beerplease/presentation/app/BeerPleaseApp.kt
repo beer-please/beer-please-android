@@ -3,33 +3,18 @@ package com.ilya4.beerplease.presentation.app
 import android.app.Activity
 import android.app.Application
 import android.app.Service
-import android.content.Context
 import com.ilya4.beerplease.data.repository.SettingsDataSource
 import com.ilya4.beerplease.presentation.di.component.AppComponent
 import com.ilya4.beerplease.presentation.di.component.DaggerAppComponent
-import com.ilya4.beerplease.presentation.di.module.ManagersModule
-import com.ilya4.beerplease.presentation.di.module.NetworkModule
-import com.ilya4.beerplease.presentation.di.module.ProviderDataModule
-import com.ilya4.beerplease.presentation.di.module.StorageModule
+import com.ilya4.beerplease.presentation.di.module.*
 
 
-import com.michaelflisar.rxbus2.interfaces.IRxBusQueue
 import dagger.android.*
-import io.reactivex.processors.BehaviorProcessor
 import moxy.MvpFacade
-import org.reactivestreams.Publisher
 import timber.log.Timber
 import javax.inject.Inject
 
-class BeerPleaseApp : Application(), IRxBusQueue, HasActivityInjector, HasServiceInjector {
-
-    companion object {
-        private lateinit var appContext: Context
-
-        fun getAppContext() = appContext
-    }
-
-    private val behaviorProcessor = BehaviorProcessor.createDefault(false)
+class BeerPleaseApp : Application(), HasActivityInjector, HasServiceInjector {
 
     @Inject
     lateinit var dispatchingAndroidInjectorActivity: DispatchingAndroidInjector<Activity>
@@ -44,13 +29,11 @@ class BeerPleaseApp : Application(), IRxBusQueue, HasActivityInjector, HasServic
     override fun onCreate() {
         super.onCreate()
         createComponent().inject(this)
-        behaviorProcessor.onNext(true)
-        appContext = applicationContext
         initTimber()
         MvpFacade.init()
     }
 
-    fun createComponent() : AppComponent{
+    private fun createComponent() : AppComponent{
             component = DaggerAppComponent
                 .builder()
                 .app(this)
@@ -58,17 +41,10 @@ class BeerPleaseApp : Application(), IRxBusQueue, HasActivityInjector, HasServic
                 .moduleNetwork(NetworkModule())
                 .moduleProvide(ProviderDataModule())
                 .moduleStorage(StorageModule())
+                .moduleNavigation(NavigationModule())
                 .build()
 
         return component
-    }
-
-    override fun isBusResumed(): Boolean {
-       return behaviorProcessor.value ?: false
-    }
-
-    override fun getResumeObservable(): Publisher<Boolean> {
-        return behaviorProcessor
     }
 
     override fun activityInjector(): AndroidInjector<Activity> {

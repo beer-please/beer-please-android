@@ -5,24 +5,24 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ilya4.beerplease.R
-import com.ilya4.beerplease.presentation.presenter.FChooseBeerStylePresenter
+import com.ilya4.beerplease.presentation.presenter.ChooseBeerStylePresenter
 import com.ilya4.beerplease.presentation.view.adapter.BeerStyleAdapter
-import com.ilya4.beerplease.presentation.view.fragment.base.BaseTabFragment
+import com.ilya4.beerplease.presentation.base.BaseTabFragment
 import com.ilya4.beerplease.presentation.view.listener.OnBeerStyleClickListener
-import com.ilya4.beerplease.presentation.view.view.FChooseBeerStyleMvpView
+import com.ilya4.beerplease.presentation.view.view.ChooseBeerStyleMvpView
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_choose_beer_style.*
 import kotlinx.android.synthetic.main.item_search_input.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
-class ChooseBeerStyleTabFragment: BaseTabFragment<FChooseBeerStylePresenter>(R.layout.fragment_choose_beer_style),
-    FChooseBeerStyleMvpView, OnBeerStyleClickListener {
+class ChooseBeerStyleTabFragment: BaseTabFragment<ChooseBeerStylePresenter>(R.layout.fragment_choose_beer_style),
+    ChooseBeerStyleMvpView, OnBeerStyleClickListener {
 
     @InjectPresenter
-    lateinit var presenter: FChooseBeerStylePresenter
+    lateinit var presenter: ChooseBeerStylePresenter
     @ProvidePresenter
-    override fun providePresenter(): FChooseBeerStylePresenter {
+    override fun providePresenter(): ChooseBeerStylePresenter {
         return super.providePresenter()
     }
 

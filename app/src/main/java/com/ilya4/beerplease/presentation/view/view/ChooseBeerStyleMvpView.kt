@@ -5,7 +5,7 @@ import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
-interface FChooseBeerStyleMvpView: MvpView {
+interface ChooseBeerStyleMvpView: MvpView {
     fun showSearchClearBtn(show: Boolean)
     fun updateStyleList(styleList: List<String>)
     fun closeFragment()

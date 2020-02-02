@@ -1,4 +1,4 @@
-package com.ilya4.beerplease.presentation.view.fragment.base;
+package com.ilya4.beerplease.presentation.base;
 
 import android.content.DialogInterface;
 import android.os.Bundle;

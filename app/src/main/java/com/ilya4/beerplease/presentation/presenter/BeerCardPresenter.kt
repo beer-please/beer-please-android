@@ -2,12 +2,10 @@ package com.ilya4.beerplease.presentation.presenter
 
 import com.ilya4.beerplease.domain.usecase.DefaultObserver
 import com.ilya4.beerplease.domain.usecase.GetBeerByIdUseCase
-import com.ilya4.beerplease.presentation.view.activity.base.BaseActivity
-import com.ilya4.beerplease.presentation.view.view.FBeerCardMvpView
-import io.reactivex.processors.BehaviorProcessor
+import com.ilya4.beerplease.presentation.view.view.BeerCardMvpView
 import moxy.MvpPresenter
 
-class FBeerCardPresenter(private val getBeerByIdUseCase: GetBeerByIdUseCase): MvpPresenter<FBeerCardMvpView>() {
+class BeerCardPresenter(private val getBeerByIdUseCase: GetBeerByIdUseCase): MvpPresenter<BeerCardMvpView>() {
 
     fun init(): Boolean {
         getBeerById(-1)

@@ -1,14 +1,13 @@
 package com.ilya4.beerplease.presentation.di.module.activity
 
-import com.ilya4.beerplease.presentation.presenter.AMainPresenter
-import com.ilya4.beerplease.presentation.view.view.AMainMvpView
+import com.ilya4.beerplease.presentation.presenter.FlowMainPresenter
 import dagger.Module
 import dagger.Provides
-import io.reactivex.processors.BehaviorProcessor
+import ru.terrakok.cicerone.Router
 
 @Module
 class MainModule {
 
     @Provides
-    fun provideAMainPresenter(): AMainPresenter = AMainPresenter()
+    fun provideAMainPresenter(router: Router): FlowMainPresenter = FlowMainPresenter(router)
 }

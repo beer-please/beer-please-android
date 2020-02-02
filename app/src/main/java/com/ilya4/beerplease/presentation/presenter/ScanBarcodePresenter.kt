@@ -10,18 +10,14 @@ import androidx.camera.core.PreviewConfig
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetector
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata
-import com.ilya4.beerplease.presentation.presenter.base.BaseMvpPresenter
-import com.ilya4.beerplease.presentation.view.activity.base.BaseActivity
-import com.ilya4.beerplease.presentation.view.view.FScanBarcodeMvpView
-import io.reactivex.processors.BehaviorProcessor
-import com.ilya4.beerplease.utils.PermissionHelper.mayRequestCamera
+import com.ilya4.beerplease.presentation.view.view.ScanBarcodeMvpView
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import java.util.concurrent.TimeUnit
 
 @InjectViewState
-class FScanBarcodePresenter(private val detector: FirebaseVisionBarcodeDetector):
-    MvpPresenter<FScanBarcodeMvpView>() {
+class ScanBarcodePresenter(private val detector: FirebaseVisionBarcodeDetector):
+    MvpPresenter<ScanBarcodeMvpView>() {
 
     private val lastAnalyzedStamp = 0L
     private lateinit var preview: Preview

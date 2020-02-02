@@ -1,4 +1,4 @@
-package com.ilya4.beerplease.presentation.view.fragment.base
+package com.ilya4.beerplease.presentation.base
 
 import android.os.Bundle
 import com.ilya4.beerplease.presentation.app.Constants.EXTRA_IS_ROOT_FRAGMENT

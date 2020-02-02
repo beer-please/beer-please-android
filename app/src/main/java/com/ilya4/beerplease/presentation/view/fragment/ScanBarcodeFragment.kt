@@ -18,10 +18,10 @@ import androidx.camera.core.Preview
 import androidx.lifecycle.LifecycleOwner
 import com.ilya4.beerplease.R
 import com.ilya4.beerplease.presentation.app.Constants.REQUEST_CAMERA
-import com.ilya4.beerplease.presentation.presenter.FScanBarcodePresenter
-import com.ilya4.beerplease.presentation.view.activity.base.BaseActivity
-import com.ilya4.beerplease.presentation.view.fragment.base.BaseTabFragment
-import com.ilya4.beerplease.presentation.view.view.FScanBarcodeMvpView
+import com.ilya4.beerplease.presentation.presenter.ScanBarcodePresenter
+import com.ilya4.beerplease.presentation.base.BaseActivity
+import com.ilya4.beerplease.presentation.base.BaseFragment
+import com.ilya4.beerplease.presentation.view.view.ScanBarcodeMvpView
 import com.ilya4.beerplease.utils.PermissionHelper
 import com.ilya4.beerplease.utils.PermissionHelper.mayRequestCamera
 import dagger.android.support.AndroidSupportInjection
@@ -30,12 +30,12 @@ import moxy.MvpPresenter
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
-class ScanBarcodeTabFragment: BaseTabFragment<FScanBarcodePresenter>(R.layout.fragment_scan_barcode), FScanBarcodeMvpView, LifecycleOwner {
+class ScanBarcodeFragment: BaseFragment<ScanBarcodePresenter>(R.layout.fragment_scan_barcode), ScanBarcodeMvpView, LifecycleOwner {
 
     @InjectPresenter
-    lateinit var presenter: FScanBarcodePresenter
+    lateinit var presenter: ScanBarcodePresenter
     @ProvidePresenter
-    override fun providePresenter(): FScanBarcodePresenter {
+    override fun providePresenter(): ScanBarcodePresenter {
         return super.providePresenter()
     }
 
@@ -136,9 +136,5 @@ class ScanBarcodeTabFragment: BaseTabFragment<FScanBarcodePresenter>(R.layout.fr
                 }
         val dialog = builder.create()
             dialog.show()
-    }
-
-    companion object{
-        const val TAG = "ScanBarcodeTabFragment"
     }
 }

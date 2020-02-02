@@ -6,9 +6,9 @@ import android.os.Build;
 import android.util.Log;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import com.ilya4.beerplease.presentation.view.activity.base.BaseActivity;
-import com.ilya4.beerplease.presentation.view.fragment.base.BaseDialogFragment;
-import com.ilya4.beerplease.presentation.view.fragment.base.BaseFragment;
+import com.ilya4.beerplease.presentation.base.BaseActivity;
+import com.ilya4.beerplease.presentation.base.BaseDialogFragment;
+import com.ilya4.beerplease.presentation.base.BaseFragment;
 
 
 import static android.Manifest.permission.*;

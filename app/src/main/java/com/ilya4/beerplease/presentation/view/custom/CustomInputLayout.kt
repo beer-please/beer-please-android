@@ -12,8 +12,8 @@ import kotlinx.android.synthetic.main.custom_input_layout.view.*
 
 class CustomInputLayout: ConstraintLayout {
 
-    lateinit var thisActiveDrawable: Drawable
-    lateinit var thisNonactiveDrawable: Drawable
+    private lateinit var thisActiveDrawable: Drawable
+    private lateinit var thisNonactiveDrawable: Drawable
 
     constructor(context: Context) : super(context) {
         init(context, null, 0)
@@ -116,10 +116,5 @@ class CustomInputLayout: ConstraintLayout {
         bottomHintText.visibility = View.VISIBLE
         topHintText.visibility = View.GONE
         imageInput.setImageDrawable(thisNonactiveDrawable)
-    }
-
-    override fun setOnClickListener(l: OnClickListener?) {
-        super.setOnClickListener(l)
-       // textInputEditText.isFocusableInTouchMode = false
     }
 }

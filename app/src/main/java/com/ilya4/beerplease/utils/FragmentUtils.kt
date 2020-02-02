@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager
 import com.ilya4.beerplease.presentation.app.Constants.ACTION
 import com.ilya4.beerplease.presentation.app.Constants.DATA_KEY_1
 import com.ilya4.beerplease.presentation.app.Constants.DATA_KEY_2
-import com.ilya4.beerplease.presentation.view.fragment.base.BaseTabFragment.FragmentInteractionCallback
+import com.ilya4.beerplease.presentation.base.BaseTabFragment.FragmentInteractionCallback
 import java.util.*
 
 class FragmentUtils {

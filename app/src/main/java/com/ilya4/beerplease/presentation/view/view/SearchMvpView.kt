@@ -6,7 +6,7 @@ import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
-interface FSearchMvpView: MvpView {
+interface SearchMvpView: MvpView {
     fun updateSearchResults(searchResults: List<SearchItem>)
     fun clearSearchResults()
     fun showResultNotFound(show: Boolean)
